@@ -96,11 +96,11 @@ NSString *CellIdentifier = @"movieCell";
     
     // Popularity of movie
     NSString *pop = [NSString stringWithFormat:@"%@", self.moviesArrayProp[indexPath.row][@"vote_average"]];
-    if( pop.length > 6) {
-        pop = [pop substringWithRange:NSMakeRange(0, 5)];
+    if( pop.length > 4) {
+        pop = [pop substringWithRange:NSMakeRange(0, 4)];
     }
-    // XXX how fix
-//    cell.popLabel.text = @"Popularity" + pop;
+    NSString *popTitle = @"Popularity: ";
+    pop = [popTitle stringByAppendingString:pop];
     cell.popLabel.text = pop;
     
     // Set the movie image

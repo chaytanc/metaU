@@ -10,9 +10,11 @@
 #import "UIImageView+AFNetworking.h"
 
 
-@interface CollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *moviesArrayProp;
+@property (strong, nonatomic) NSArray *filteredData;
 
 @end
 
@@ -23,8 +25,8 @@
     // Do any additional setup after loading the view.
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.searchBar.delegate = self;
 
-    
     // Refresh for the data in the tableview
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -45,6 +47,9 @@
            }
        }];
     [task resume];
+    
+    // Init VC to have all data showing before any searches
+    self.filteredData = self.moviesArrayProp;
     
 }
 
@@ -73,14 +78,15 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.moviesArrayProp.count;
+    return self.filteredData.count;
 }
 
+//MARK: Coll View
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCellID" forIndexPath:indexPath];
     
-    NSString *urlString = self.moviesArrayProp[indexPath.row][@"poster_path"];
+    NSString *urlString = self.filteredData[indexPath.row][@"poster_path"];
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *fullURL = [baseURLString stringByAppendingString:urlString];
     NSURL *url = [NSURL URLWithString:fullURL];
@@ -89,6 +95,12 @@
     return cell;
 }
 
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"Selected cell number: %ld", (long)indexPath.row);
+}
+
+//MARK: Refresh
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
 
@@ -123,8 +135,57 @@
         [task resume];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"Selected cell number: %ld", (long)indexPath.row);
+//MARK: Search Bar
+
+//- (UICollectionReusableView *)supplementaryViewForElementKind:(NSString *)elementKind
+//                                                  atIndexPath:(NSIndexPath *)indexPath {
+//    if (elementKind == UICollectionElementKindSectionHeader) {
+//
+//        UICollectionReusableView *headerView =  [self.collectionView dequeueReusableSupplementaryViewOfKind:(NSString *)UICollectionElementKindSectionHeader withReuseIdentifier: @"CollectionViewHeader" forIndexPath:(NSIndexPath *)indexPath];
+//        return headerView;
+//
+//    }
+//
+//    return [[UICollectionReusableView alloc] init];
+//}
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    UITableViewCell *cell = [self.collectionView dequeueReusableCellWithIdentifier:@"TableCell"
+//                                                                 forIndexPath:indexPath];
+//    cell.textLabel.text = self.filteredData[indexPath.row];
+//
+//    return cell;
+//}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    // Dynamically update our filteredData prop with what the user changes in the search bar
+    if (searchText.length != 0) {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
+            // This makes it so we search through titles
+            return [evaluatedObject[@"title"] containsString:searchText];
+        }];
+        self.filteredData = [self.moviesArrayProp filteredArrayUsingPredicate:predicate];
+    }
+    
+    else {
+        self.filteredData = self.moviesArrayProp;
+    }
+    
+    [self.collectionView reloadData];
+ 
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.collectionView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
 }
 
 /*
