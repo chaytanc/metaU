@@ -43,8 +43,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 ## Video Walkthrough
 Here's a walkthrough of implemented user stories:
 
-<img src='https://recordit.co/anGmPmj36B' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
+[GIF Walkthrough Link](https://recordit.co/anGmPmj36B)
 GIF created with [RecordIt](https://recordit.co/).
 
 ## Notes
