@@ -37,7 +37,9 @@ NSString *CellIdentifier = @"movieCell";
     self.tableView.rowHeight = 170;
 //    self.tableView.estimatedRowHeight = 250;
 //    self.tableView.rowHeight = UITableViewAutomaticDimension;
-
+    
+    // Start the activity indicator
+    [self.activityIndicator startAnimating];
 
     // Callback for getting movie rating data from themoviedb.org and populating tableview w this data
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=aaef6e1a9cec569a711a7e7dddd52fca"];
@@ -50,11 +52,8 @@ NSString *CellIdentifier = @"movieCell";
                [self networkError];
            }
            else {
-               // Start the activity indicator
-               [self.activityIndicator startAnimating];
 
                [self loadData: data];
-
                [self.activityIndicator stopAnimating];
            }
        }];

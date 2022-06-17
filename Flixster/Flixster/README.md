@@ -2,29 +2,29 @@
 
 **Flixster** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total XXX todo
+Time spent: **20** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is complete:
 
-- [ ] User sees an app icon on the home screen and a styled launch screen.
-- [ ] User can view a list of movies currently playing in theaters from The Movie Database.
-- [ ] Poster images are loaded using the UIImageView category in the AFNetworking library.
-- [ ] User sees a loading state while waiting for the movies API.
-- [ ] User can pull to refresh the movie list.
-- [ ] User sees an error message when there's a networking error.
-- [ ] User can tap a tab bar button to view a grid layout of Movie Posters using a CollectionView.
+- [x] User sees an app icon on the home screen and a styled launch screen.
+- [x] User can view a list of movies currently playing in theaters from The Movie Database.
+- [x] Poster images are loaded using the UIImageView category in the AFNetworking library.
+- [x] User sees a loading state while waiting for the movies API.
+- [x] User can pull to refresh the movie list.
+- [x] User sees an error message when there's a networking error.
+- [x] User can tap a tab bar button to view a grid layout of Movie Posters using a CollectionView.
 
 The following **optional** features are implemented:
 
 - [ ] User can tap a poster in the collection view to see a detail screen of that movie
-- [ ] User can search for a movie.
+- [x] User can search for a movie.
 - [ ] All images fade in as they are loading.
 - [ ] User can view the large movie poster by tapping on a cell.
 - [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
 - [ ] Customize the selection effect of the cell.
-- [ ] Customize the navigation bar.
+- [x] Customize the navigation bar.
 - [ ] Customize the UI.
 - [ ] Run your app on a real device.
 
@@ -33,11 +33,12 @@ The following **additional** features are implemented:
 - [x] Autolayout constraints allow various sized iPhones to display correctly.  
 - [x] Embedded each synopsis in a scroll view to allow for easier reading.  
 - [x] Displayed the average rating of each movie.
+- [x] Added a search bar to the collection view.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-XXX todo
-1.
-2.
+1. I want to do programmatic segues for the detailed view of each movie.  
+2. I want to programmatically controll the CollectionView rather than through the Storyboard since it was very difficult to understand what was causing display issues.  
+3. I want to finish figuring out how to center the activity indicator on the home page.  
 
 ## Video Walkthrough XXX todo
 
@@ -50,11 +51,11 @@ GIF created with [RecordIt](https://recordit.co/).
 ## Notes
 
 Describe any challenges encountered while building the app.
-- Tab bar item images would not set.
-- Thought the tab bar was not showing up when it was, it was just transparent.
-- Getting text to size such that it all shows up and resizes so it can all be read, both titles and synopses.
-- Getting collection view to show multiple rows.
-- Imageview would not set autolayout constraints. Ended up just being buggy and I needed to delete and re-add it.
+- Tab bar item images would not set. This was because I was setting the 'Selected Image' instead of the 'Image' category which I did not notice.  
+- Thought the tab bar was not showing up when it was, but it was transparent.  
+- Getting text to size such that it all shows up and resizes so it can all be read, both titles and synopses.  
+- Getting collection view to show multiple rows.  
+- Imageview would not set autolayout constraints. Ended up just being buggy and I needed to delete and re-add it.  
 
 ## Credits
 

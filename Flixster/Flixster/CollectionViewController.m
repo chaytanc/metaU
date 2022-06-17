@@ -44,12 +44,13 @@
            }
            else {
                [self loadData: data];
+               
+               // Init VC to have all data showing before any searches
+               self.filteredData = self.moviesArrayProp;
            }
        }];
     [task resume];
-    
-    // Init VC to have all data showing before any searches
-    self.filteredData = self.moviesArrayProp;
+
     
 }
 
