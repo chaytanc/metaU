@@ -138,6 +138,7 @@ NSString *CellIdentifier = @"movieCell";
                 [self loadData:data];
                 // Reload the tableView now that there is new data
                 [self.tableView reloadData];
+                [self.activityIndicator stopAnimating];
             }
 
 
