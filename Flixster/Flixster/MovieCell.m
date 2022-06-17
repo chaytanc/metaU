@@ -12,6 +12,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.titleLabel.numberOfLines = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

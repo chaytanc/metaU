@@ -16,20 +16,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLS-ps-VAF">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLS-ps-VAF">
                                 <rect key="frame" x="87" y="384" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="fWU-xW-qgl">
-                                        <rect key="frame" x="51" y="-5" width="138" height="139"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="fWU-xW-qgl">
+                                        <rect key="frame" x="51" y="-5.5" width="138" height="139"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fWU-xW-qgl" secondAttribute="height" multiplier="138:139" id="Rmg-k9-r75"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="qfS-Jr-0Yg"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="fWU-xW-qgl" firstAttribute="centerY" secondItem="iLS-ps-VAF" secondAttribute="centerY" id="9xP-HU-q2m"/>
+                                    <constraint firstItem="fWU-xW-qgl" firstAttribute="centerX" secondItem="iLS-ps-VAF" secondAttribute="centerX" id="NO9-6a-uMa"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iLS-ps-VAF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="DsN-V7-TON"/>
+                            <constraint firstItem="iLS-ps-VAF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="340" id="LCR-gr-3dz"/>
+                            <constraint firstItem="iLS-ps-VAF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gaQ-VE-2qb"/>
+                            <constraint firstItem="iLS-ps-VAF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="hc9-Ae-gSY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iLS-ps-VAF" secondAttribute="trailing" constant="87" id="wDH-bi-9g5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="iLS-ps-VAF" secondAttribute="bottom" constant="350" id="xOE-SU-HWf"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

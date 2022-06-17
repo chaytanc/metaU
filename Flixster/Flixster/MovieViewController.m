@@ -13,7 +13,7 @@
 @interface MovieViewController () <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) NSArray *moviesArrayProp;
 @end
@@ -34,7 +34,7 @@ NSString *CellIdentifier = @"movieCell";
     
     // Tableview setup
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 180;
+    self.tableView.rowHeight = 170;
 //    self.tableView.estimatedRowHeight = 250;
 //    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
@@ -50,7 +50,12 @@ NSString *CellIdentifier = @"movieCell";
                [self networkError];
            }
            else {
+               // Start the activity indicator
+               [self.activityIndicator startAnimating];
+
                [self loadData: data];
+
+               [self.activityIndicator stopAnimating];
            }
        }];
 
@@ -61,9 +66,6 @@ NSString *CellIdentifier = @"movieCell";
     NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
     NSArray *moviesArray = dataDictionary[@"results"];
-//    for (id movie in moviesArray) {
-//        NSLog(@"%@", movie); // Log each movie
-//    }
     self.moviesArrayProp = moviesArray;
     [self.tableView reloadData];
 }
@@ -86,9 +88,9 @@ NSString *CellIdentifier = @"movieCell";
 
     // Title and description
     cell.titleLabel.text = self.moviesArrayProp[indexPath.row][@"title"];
+
     cell.synopsisLabel.text = self.moviesArrayProp[indexPath.row][@"overview"];
     cell.synopsisLabel.numberOfLines = 0;
-//    cell.synopsisLabel.lineBreakMode = NSLineBreakByWordWrapping;
 //    cell.synopsisLabel.adjustsFontSizeToFitWidth = YES;
 //    cell.synopsisLabel.minimumScaleFactor = 0.4;
     
@@ -97,6 +99,8 @@ NSString *CellIdentifier = @"movieCell";
     if( pop.length > 6) {
         pop = [pop substringWithRange:NSMakeRange(0, 5)];
     }
+    // XXX how fix
+//    cell.popLabel.text = @"Popularity" + pop;
     cell.popLabel.text = pop;
     
     // Set the movie image

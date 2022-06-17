@@ -22,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+
     
     // Refresh for the data in the tableview
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -49,7 +51,6 @@
 
 - (void) loadData: (NSData*) data {
     NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//    NSLog(@"%@", dataDictionary);// log an object with the %@ formatter.
 
     NSArray *moviesArray = dataDictionary[@"results"];
     for (id movie in moviesArray) {
@@ -120,6 +121,10 @@
         }];
     
         [task resume];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"Selected cell number: %ld", (long)indexPath.row);
 }
 
 /*
