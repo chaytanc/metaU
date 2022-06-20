@@ -26,6 +26,7 @@
 }
 
 - (IBAction)didTapLogin:(id)sender {
+    // Unsure how APIManager has the function loginWithCompletion since it seems to be in BDBOAuth...
     [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
         if (success) {
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];

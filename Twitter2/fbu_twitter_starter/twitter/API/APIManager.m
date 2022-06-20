@@ -16,6 +16,8 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 
 @implementation APIManager
 
+// Plus is a class method, - is an instance method
+// This seems like some kind of factory builder method for this class
 + (instancetype)shared {
     static APIManager *sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -31,10 +33,10 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     
     // TODO: fix code below to pull API Keys from your new Keys.plist file
     
-    NSString *path = ;
-    NSDictionary *dict = ;
-    NSString *key = ;
-    NSString *secret = ;
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+    NSString *key = [dict objectForKey:@"consumer_Key"];
+    NSString *secret = [dict objectForKey:@"consumer_Secret"];
     
     // Check for launch arguments override
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"consumer-key"]) {
