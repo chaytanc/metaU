@@ -254,6 +254,10 @@
                                                             </constraints>
                                                         </view>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="jkc-eM-Na7" firstAttribute="height" secondItem="1Vp-Oi-dwb" secondAttribute="height" id="639-Ip-dVU"/>
+                                                        <constraint firstItem="jkc-eM-Na7" firstAttribute="width" secondItem="1Vp-Oi-dwb" secondAttribute="width" id="Qeb-C3-lp0"/>
+                                                    </constraints>
                                                     <edgeInsets key="layoutMargins" top="5" left="5" bottom="5" right="5"/>
                                                 </stackView>
                                             </subviews>

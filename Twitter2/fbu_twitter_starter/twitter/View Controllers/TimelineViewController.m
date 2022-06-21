@@ -27,27 +27,47 @@
     [super viewDidLoad];
     
     self.timelineTableView.dataSource = self;
+    
+    // Refresh for the data in the tableview
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.timelineTableView insertSubview:refreshControl atIndex:0];
 
-    // Get timeline and print tweets that we found from the call
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-        if (tweets) {
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
-            self.arrayOfTweets = tweets; //XXX is this warning of "Incompatible pointer types assigning to 'NSMutableArray *' from 'NSArray *'" ok??
-
-            for (Tweet *tweet in tweets) {
-                NSString *text = tweet.text;
-                NSLog(@"%@", text);
-            }
-        } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-        }
-        [self.timelineTableView reloadData];
-    }];
+    [self fetchTweets];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) fetchTweets {
+    
+    // Get timeline and print tweets that we found from the call
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            self.arrayOfTweets = tweets; //XXX is this warning of "Incompatible pointer types assigning to 'NSMutableArray *' from 'NSArray *'" ok??
+        }
+        else {
+            [self presentNetworkErrorAlert];
+        }
+
+        [self.timelineTableView reloadData];
+    }];
+    
+}
+
+- (void) presentNetworkErrorAlert {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
+                                   message:@"Tweets failed to load. Check your connection."
+                                   preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+       handler:^(UIAlertAction * action) {}];
+
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 /*
@@ -71,6 +91,28 @@
     // Clear authentication access tokens
     [[APIManager shared] logout];
 }
+
+// MARK: Refresh
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    
+    // Get timeline and print tweets that we found from the call
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully refreshed home timeline");
+            self.arrayOfTweets = tweets;
+        }
+        else {
+            [self presentNetworkErrorAlert];
+        }
+
+        [self.timelineTableView reloadData];
+        // Tell the refreshControl to stop spinning
+         [refreshControl endRefreshing];
+    }];
+
+}
+
 
 // MARK: Tableview
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -112,6 +154,7 @@
     }
 
     // set tweet content
+    //XXX despite these efforts, tweets still get cut off by ellipse after certain length instead of making new lines and wrapping or shrinking font size
     cell.tweetLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.tweetLabel.numberOfLines = 0;
     cell.tweetLabel.minimumScaleFactor = 0.5;
