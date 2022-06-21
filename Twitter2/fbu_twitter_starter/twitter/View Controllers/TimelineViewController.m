@@ -88,8 +88,9 @@
 
 // Switch to loginVC when user taps logout
 - (IBAction)didTapLogout:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
+    // Segue to LoginVC w appDelegate
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
@@ -131,6 +132,9 @@
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
     [cell.profileImageView setImageWithURL: url];
+    // Make it a circle
+    [cell.profileImageView.layer setCornerRadius:cell.profileImageView.frame.size.width/2];
+    [cell.profileImageView.layer setMasksToBounds:YES];
 
     [cell formatHeaderAndBody];
     [cell formatFooter];

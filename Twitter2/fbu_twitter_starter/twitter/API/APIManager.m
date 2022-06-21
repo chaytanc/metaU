@@ -65,22 +65,8 @@ static NSString * const baseURLString = @"https://api.twitter.com";
         
         NSMutableArray* tweets = [Tweet tweetsWithArray:tweetDictionaries];
         completion(tweets, nil);
-//
-//       // Manually cache the tweets. If the request fails, restore from cache if possible.
-//       NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tweetDictionaries];
-//       [[NSUserDefaults standardUserDefaults] setValue:data forKey:@"hometimeline_tweets"];
-//
-//       completion(tweetDictionaries, nil);
        
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-       
-//       NSArray *tweetDictionaries = nil;
-//
-//       // Fetch tweets from cache if possible
-//       NSData *data = [[NSUserDefaults standardUserDefaults] valueForKey:@"hometimeline_tweets"];
-//       if (data != nil) {
-//           tweetDictionaries = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//       }
        
        completion(nil, error);
    }];

@@ -28,10 +28,8 @@
     self.userNameLabel.adjustsFontSizeToFitWidth = YES;
     
     [self.displayNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    self.displayNameLabel.minimumScaleFactor = 0.5;
+    self.displayNameLabel.minimumScaleFactor = 0.8;
     self.displayNameLabel.adjustsFontSizeToFitWidth = YES;
-    self.displayNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.displayNameLabel.numberOfLines = 0;
 
     [self.createdAtLabel setFont:[UIFont systemFontOfSize:14]];
     self.createdAtLabel.minimumScaleFactor = 0.5;
@@ -41,8 +39,8 @@
     //XXX despite these efforts, tweets still get cut off by ellipse after certain length instead of making new lines and wrapping or shrinking font size
     self.tweetLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.tweetLabel.numberOfLines = 0;
-    self.tweetLabel.minimumScaleFactor = 0.5;
-    [self.tweetLabel setFont:[UIFont systemFontOfSize:12]];
+//    self.tweetLabel.minimumScaleFactor = 0.5;
+    [self.tweetLabel setFont:[UIFont systemFontOfSize:14]];
 }
 
 - (void) formatFooter {
@@ -66,6 +64,7 @@
     [self.messageButton setTitle: @"" forState:UIControlStateNormal];
 }
 
+// Uses the data in self.tweet to reload UI
 - (void)refreshData{
     NSString* username = [@"@" stringByAppendingString:self.tweet.user.screenName];
     self.userNameLabel.text = username;
