@@ -37,6 +37,10 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     NSString *key = [dict objectForKey:@"consumer_Key"];
     NSString *secret = [dict objectForKey:@"consumer_Secret"];
     
+//    NSString *key = [dict objectForKey:@"test_Key"];
+//    NSString *secret = [dict objectForKey:@"test_Secret"];
+    
+    
     // Check for launch arguments override
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"consumer-key"]) {
         key = [[NSUserDefaults standardUserDefaults] stringForKey:@"consumer-key"];
@@ -88,6 +92,20 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     NSDictionary *parameters = @{@"status": text};
     
     // Make post request to twitter API using parameters with new tweet text and return tweet if success
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+// General method to do things like favorite, unfavorite, retweet, unreweet, depending on urlString passed
+- (void) tweetButtonRequest: (Tweet *)tweet
+                  urlString: (NSString*)urlString
+                 completion: (void (^)(Tweet *, NSError *))completion {
+    
+    NSDictionary *parameters = @{@"id": tweet.idStr};
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);

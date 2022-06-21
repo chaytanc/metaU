@@ -43,10 +43,8 @@
         self.retweeted = [dictionary[@"retweeted"] boolValue];
         self.commentCount = [dictionary[@"reply_count"] intValue];
 
-        // TODO: initialize user
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
-
-        // TODO: Format and set createdAtString
+        // Format and set createdAtString
         NSString *createdAtOriginalString = dictionary[@"created_at"];
         [self setFormattedCreatedAtString: createdAtOriginalString];
 
@@ -66,5 +64,6 @@
     formatter.timeStyle = NSDateFormatterNoStyle;
     self.createdAtString = [formatter stringFromDate:date];
 }
+
 
 @end

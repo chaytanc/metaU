@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)didTapRetweet:(id)sender;
 - (IBAction)didTapFav:(id)sender;
 - (IBAction)didTapMessage:(id)sender;
+- (void)refreshData;
 
 @end
 

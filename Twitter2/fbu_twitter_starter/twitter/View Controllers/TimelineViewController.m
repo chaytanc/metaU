@@ -123,6 +123,8 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
     TweetCell *cell = [self.timelineTableView dequeueReusableCellWithIdentifier:@"tweetCell_ID" forIndexPath:indexPath];
+    // Passes tweet data to TweetCell
+    cell.tweet = tweet;
 
     // set profile pic
     NSString *URLString = tweet.user.profilePicture;
@@ -130,33 +132,23 @@
     [cell.profileImageView setImageWithURL: url];
 
     // set display name, user name, createdAt
-    NSString* username = [@"@" stringByAppendingString:tweet.user.screenName];
-    cell.userNameLabel.text = username;
+//    NSString* username = [@"@" stringByAppendingString:tweet.user.screenName];
+//    cell.userNameLabel.text = username;
     [cell.userNameLabel setFont:[UIFont systemFontOfSize:14]];
     cell.userNameLabel.minimumScaleFactor = 0.5;
     cell.userNameLabel.adjustsFontSizeToFitWidth = YES;
     
-    cell.displayNameLabel.text = tweet.user.name;
+//    cell.displayNameLabel.text = tweet.user.name;
     [cell.displayNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
     cell.displayNameLabel.minimumScaleFactor = 0.5;
     cell.displayNameLabel.adjustsFontSizeToFitWidth = YES;
     cell.displayNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.displayNameLabel.numberOfLines = 0;
 
-    cell.createdAtLabel.text = tweet.createdAtString;
+//    cell.createdAtLabel.text = tweet.createdAtString;
     [cell.createdAtLabel setFont:[UIFont systemFontOfSize:14]];
     cell.createdAtLabel.minimumScaleFactor = 0.5;
     cell.createdAtLabel.adjustsFontSizeToFitWidth = YES;
-    
-    // set retweet, fav icons images based on tweet status
-    if (tweet.retweeted) {
-        UIImage *retweetedImageIcon = [UIImage imageNamed: @"retweet-icon-green"];
-        [cell.retweetButton setImage:retweetedImageIcon forState: UIControlStateNormal];
-    }
-    if (tweet.favorited) {
-        UIImage *favoritedImageIcon = [UIImage imageNamed: @"favorite-icon-red"];
-        [cell.favButton setImage:favoritedImageIcon forState: UIControlStateNormal];
-    }
 
     // set tweet content
     //XXX despite these efforts, tweets still get cut off by ellipse after certain length instead of making new lines and wrapping or shrinking font size
@@ -164,20 +156,20 @@
     cell.tweetLabel.numberOfLines = 0;
     cell.tweetLabel.minimumScaleFactor = 0.5;
     [cell.tweetLabel setFont:[UIFont systemFontOfSize:12]];
-    cell.tweetLabel.text = tweet.text;
+//    cell.tweetLabel.text = tweet.text;
 
     // set num favs, retweets, comments
-    cell.numFavLabel.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
+//    cell.numFavLabel.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     cell.numFavLabel.minimumScaleFactor = 0.5;
     cell.numFavLabel.adjustsFontSizeToFitWidth = YES;
     [cell.numFavLabel setFont:[UIFont systemFontOfSize:10]];
 
-    cell.numCommentsLabel.text = [NSString stringWithFormat:@"%i", tweet.commentCount];
+//    cell.numCommentsLabel.text = [NSString stringWithFormat:@"%i", tweet.commentCount];
     cell.numCommentsLabel.minimumScaleFactor = 0.5;
     cell.numCommentsLabel.adjustsFontSizeToFitWidth = YES;
     [cell.numCommentsLabel setFont:[UIFont systemFontOfSize:10]];
     
-    cell.numRetweetsLabel.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
+//    cell.numRetweetsLabel.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.numRetweetsLabel.minimumScaleFactor = 0.5;
     cell.numRetweetsLabel.adjustsFontSizeToFitWidth = YES;
     [cell.numRetweetsLabel setFont:[UIFont systemFontOfSize:10]];
@@ -187,8 +179,9 @@
     [cell.retweetButton setTitle: @"" forState:UIControlStateNormal];
     [cell.favButton setTitle: @"" forState:UIControlStateNormal];
     [cell.messageButton setTitle: @"" forState:UIControlStateNormal];
-
     
+    [cell refreshData];
+        
     return cell;
 }
 

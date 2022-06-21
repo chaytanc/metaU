@@ -21,5 +21,8 @@
 + (instancetype)shared;
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
 - (void)postStatusWithText:(NSString*)text completion:(void (^)(Tweet*, NSError*))completion;
+- (void)tweetButtonRequest:(Tweet *)tweet
+                urlString: (NSString*)urlString
+                completion:(void (^)(Tweet *, NSError *))completion;
 
 @end
