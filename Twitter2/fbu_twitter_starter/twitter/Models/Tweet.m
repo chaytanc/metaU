@@ -42,6 +42,7 @@
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
+        //XXX note that this does not currently work because it is a premium developer feature
         self.commentCount = [dictionary[@"reply_count"] intValue];
 
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
@@ -63,8 +64,6 @@
     // Configure output format
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterNoStyle;
-//    NSString* timeAgoDate =
-//    self.createdAtString = [formatter stringFromDate:date];
     self.createdAtString = date.shortTimeAgoSinceNow;
 }
 

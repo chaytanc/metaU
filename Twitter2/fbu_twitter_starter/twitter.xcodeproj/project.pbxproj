@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		9CF6C7E528611FD1005FC69C /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6C7E428611FD1005FC69C /* Tweet.m */; };
 		9CF6C7E82861391F005FC69C /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6C7E72861391F005FC69C /* TweetCell.m */; };
 		9CF6C7EB28622550005FC69C /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6C7EA28622550005FC69C /* ComposeViewController.m */; };
+		9CF6C7F028626FC8005FC69C /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6C7EE28626FC8005FC69C /* DetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		9CF6C7E72861391F005FC69C /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		9CF6C7E928622550005FC69C /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		9CF6C7EA28622550005FC69C /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		9CF6C7EE28626FC8005FC69C /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		9CF6C7EF28626FC8005FC69C /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 		6AD2790320BCC01B0085BC29 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9CF6C7EF28626FC8005FC69C /* DetailsViewController.h */,
+				9CF6C7EE28626FC8005FC69C /* DetailsViewController.m */,
 				9CF6C7E928622550005FC69C /* ComposeViewController.h */,
 				9CF6C7EA28622550005FC69C /* ComposeViewController.m */,
 				6AD2790420BCC0380085BC29 /* LoginViewController.h */,
@@ -278,6 +283,7 @@
 			files = (
 				9CF6C7E82861391F005FC69C /* TweetCell.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
+				9CF6C7F028626FC8005FC69C /* DetailsViewController.m in Sources */,
 				9CF6C7E228611FBD005FC69C /* User.m in Sources */,
 				9CF6C7EB28622550005FC69C /* ComposeViewController.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,

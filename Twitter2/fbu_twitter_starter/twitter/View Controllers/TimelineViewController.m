@@ -14,9 +14,10 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
+#import "DetailsViewController.h"
 
 
-@interface TimelineViewController () <UITableViewDataSource, ComposeViewControllerDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate>
 - (IBAction)didTapLogout:(id)sender;
 
 
@@ -33,7 +34,7 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.timelineTableView insertSubview:refreshControl atIndex:0];
-    [self.timelineTableView setAllowsSelection:NO];
+//    [self.timelineTableView setAllowsSelection:NO];
 
     [self fetchTweets];
 }
@@ -75,15 +76,23 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-//XXX is this the segue going TO this VC instead of FROM this vc to Compose
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //XXX How does this know what destinationVC is?? Shouldn't it be passed in to this method or something?
-    // Get the new view controller using [segue destinationViewController].
-    UINavigationController *navigationController = [segue destinationViewController];
-    //XXX does this assume that we're coming from composeController? What if we had more VCs?
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    // Tell composeController we can receive info about tweet composed
-    composeController.delegate = self;
+    
+    if ([[segue identifier] isEqualToString:@"detailsSegue"])
+    {
+        NSIndexPath *indexPath = [self.timelineTableView indexPathForCell:sender];
+        //if you need to pass data to the next controller do it here
+        UINavigationController *detailsViewController = [segue destinationViewController];
+        DetailsViewController *detailsController = (DetailsViewController*)detailsViewController.topViewController;
+        detailsController.tweet = self.arrayOfTweets[indexPath.row];
+    }
+    else if ([[segue identifier] isEqualToString:@"composeSegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        // Tell composeController we can receive info about tweet composed
+        composeController.delegate = self;
+    }
 }
 
 // Switch to loginVC when user taps logout
@@ -122,6 +131,17 @@
 
 
 // MARK: Tableview
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TweetCell *cell = [self.timelineTableView dequeueReusableCellWithIdentifier:@"tweetCell_ID" forIndexPath:indexPath];
+    // Keep color the same when selected
+    [cell setBackgroundColor:UIColor.systemBackgroundColor];
+    
+    NSLog(@"Tapped tweet");
+    NSLog(@"%@", self.arrayOfTweets[indexPath.row]);
+    [self performSegueWithIdentifier:@"detailsSegue" sender:self];
+}
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
     TweetCell *cell = [self.timelineTableView dequeueReusableCellWithIdentifier:@"tweetCell_ID" forIndexPath:indexPath];
