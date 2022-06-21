@@ -13,9 +13,10 @@
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
 
-@interface TimelineViewController () <UITableViewDataSource>
+@interface TimelineViewController () <UITableViewDataSource, ComposeViewControllerDelegate>
 - (IBAction)didTapLogout:(id)sender;
 
 
@@ -70,15 +71,19 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+//XXX is this the segue going TO this VC instead of FROM this vc to Compose
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //XXX How does this know what destinationVC is?? Shouldn't it be passed in to this method or something?
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    //XXX does this assume that we're coming from composeController? What if we had more VCs?
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    // Tell composeController we can receive info about tweet composed
+    composeController.delegate = self;
 }
-*/
 
 // Switch to loginVC when user taps logout
 - (IBAction)didTapLogout:(id)sender {
@@ -189,6 +194,15 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrayOfTweets.count;
+}
+
+// Receive tweet tweeted as a delegate of ComposeVC
+- (void)didTweet:(nonnull Tweet *)tweet {
+    // Add to our array of tweets to display and reload (and remove oldest being displayed)
+    [self.arrayOfTweets insertObject:tweet atIndex:0];
+    NSUInteger endOfArray = self.arrayOfTweets.count - 1;
+    [self.arrayOfTweets removeObjectAtIndex:endOfArray];
+    [self.timelineTableView reloadData];
 }
 
 
