@@ -22,6 +22,50 @@
     // Configure the view for the selected state
 }
 
+- (void) formatHeaderAndBody {
+    [self.userNameLabel setFont:[UIFont systemFontOfSize:14]];
+    self.userNameLabel.minimumScaleFactor = 0.5;
+    self.userNameLabel.adjustsFontSizeToFitWidth = YES;
+    
+    [self.displayNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    self.displayNameLabel.minimumScaleFactor = 0.5;
+    self.displayNameLabel.adjustsFontSizeToFitWidth = YES;
+    self.displayNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.displayNameLabel.numberOfLines = 0;
+
+    [self.createdAtLabel setFont:[UIFont systemFontOfSize:14]];
+    self.createdAtLabel.minimumScaleFactor = 0.5;
+    self.createdAtLabel.adjustsFontSizeToFitWidth = YES;
+    
+    // set tweet content
+    //XXX despite these efforts, tweets still get cut off by ellipse after certain length instead of making new lines and wrapping or shrinking font size
+    self.tweetLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.tweetLabel.numberOfLines = 0;
+    self.tweetLabel.minimumScaleFactor = 0.5;
+    [self.tweetLabel setFont:[UIFont systemFontOfSize:12]];
+}
+
+- (void) formatFooter {
+    // format num favs, retweets, comments
+    self.numFavLabel.minimumScaleFactor = 0.5;
+    self.numFavLabel.adjustsFontSizeToFitWidth = YES;
+    [self.numFavLabel setFont:[UIFont systemFontOfSize:10]];
+
+    self.numCommentsLabel.minimumScaleFactor = 0.5;
+    self.numCommentsLabel.adjustsFontSizeToFitWidth = YES;
+    [self.numCommentsLabel setFont:[UIFont systemFontOfSize:10]];
+    
+    self.numRetweetsLabel.minimumScaleFactor = 0.5;
+    self.numRetweetsLabel.adjustsFontSizeToFitWidth = YES;
+    [self.numRetweetsLabel setFont:[UIFont systemFontOfSize:10]];
+    
+    // Fix button titles to be empty
+    [self.commentButton setTitle: @"" forState:UIControlStateNormal];
+    [self.retweetButton setTitle: @"" forState:UIControlStateNormal];
+    [self.favButton setTitle: @"" forState:UIControlStateNormal];
+    [self.messageButton setTitle: @"" forState:UIControlStateNormal];
+}
+
 - (void)refreshData{
     NSString* username = [@"@" stringByAppendingString:self.tweet.user.screenName];
     self.userNameLabel.text = username;

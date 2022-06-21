@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)didTapFav:(id)sender;
 - (IBAction)didTapMessage:(id)sender;
 - (void)refreshData;
+- (void)formatHeaderAndBody;
+- (void)formatFooter;
+
 
 @end
 

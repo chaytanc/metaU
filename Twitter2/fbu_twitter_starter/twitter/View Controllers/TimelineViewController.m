@@ -33,6 +33,7 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.timelineTableView insertSubview:refreshControl atIndex:0];
+    [self.timelineTableView setAllowsSelection:NO];
 
     [self fetchTweets];
 }
@@ -131,55 +132,8 @@
     NSURL *url = [NSURL URLWithString:URLString];
     [cell.profileImageView setImageWithURL: url];
 
-    // set display name, user name, createdAt
-//    NSString* username = [@"@" stringByAppendingString:tweet.user.screenName];
-//    cell.userNameLabel.text = username;
-    [cell.userNameLabel setFont:[UIFont systemFontOfSize:14]];
-    cell.userNameLabel.minimumScaleFactor = 0.5;
-    cell.userNameLabel.adjustsFontSizeToFitWidth = YES;
-    
-//    cell.displayNameLabel.text = tweet.user.name;
-    [cell.displayNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    cell.displayNameLabel.minimumScaleFactor = 0.5;
-    cell.displayNameLabel.adjustsFontSizeToFitWidth = YES;
-    cell.displayNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.displayNameLabel.numberOfLines = 0;
-
-//    cell.createdAtLabel.text = tweet.createdAtString;
-    [cell.createdAtLabel setFont:[UIFont systemFontOfSize:14]];
-    cell.createdAtLabel.minimumScaleFactor = 0.5;
-    cell.createdAtLabel.adjustsFontSizeToFitWidth = YES;
-
-    // set tweet content
-    //XXX despite these efforts, tweets still get cut off by ellipse after certain length instead of making new lines and wrapping or shrinking font size
-    cell.tweetLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.tweetLabel.numberOfLines = 0;
-    cell.tweetLabel.minimumScaleFactor = 0.5;
-    [cell.tweetLabel setFont:[UIFont systemFontOfSize:12]];
-//    cell.tweetLabel.text = tweet.text;
-
-    // set num favs, retweets, comments
-//    cell.numFavLabel.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
-    cell.numFavLabel.minimumScaleFactor = 0.5;
-    cell.numFavLabel.adjustsFontSizeToFitWidth = YES;
-    [cell.numFavLabel setFont:[UIFont systemFontOfSize:10]];
-
-//    cell.numCommentsLabel.text = [NSString stringWithFormat:@"%i", tweet.commentCount];
-    cell.numCommentsLabel.minimumScaleFactor = 0.5;
-    cell.numCommentsLabel.adjustsFontSizeToFitWidth = YES;
-    [cell.numCommentsLabel setFont:[UIFont systemFontOfSize:10]];
-    
-//    cell.numRetweetsLabel.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
-    cell.numRetweetsLabel.minimumScaleFactor = 0.5;
-    cell.numRetweetsLabel.adjustsFontSizeToFitWidth = YES;
-    [cell.numRetweetsLabel setFont:[UIFont systemFontOfSize:10]];
-    
-    // Fix button titles to be empty
-    [cell.commentButton setTitle: @"" forState:UIControlStateNormal];
-    [cell.retweetButton setTitle: @"" forState:UIControlStateNormal];
-    [cell.favButton setTitle: @"" forState:UIControlStateNormal];
-    [cell.messageButton setTitle: @"" forState:UIControlStateNormal];
-    
+    [cell formatHeaderAndBody];
+    [cell formatFooter];
     [cell refreshData];
         
     return cell;
