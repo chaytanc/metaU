@@ -11,8 +11,13 @@
 
 @interface APIManager : BDBOAuth1SessionManager
 
-+ (instancetype)shared;
+// Note that we subclass BDBOAuth so we can have the login method
+// MARK: Properties
 
+
+// MARK: Methods
+
++ (instancetype)shared;
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
 
 @end

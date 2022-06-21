@@ -10,4 +10,8 @@
 
 @interface TimelineViewController : UIViewController
 
+// MARK: Properties
+@property (nonatomic, strong) NSMutableArray* arrayOfTweets;
+@property (weak, nonatomic) IBOutlet UITableView *timelineTableView;
+
 @end
