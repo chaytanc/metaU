@@ -5,20 +5,21 @@
 //  Created by Chaytan Inman on 6/16/22.
 //
 
-#import "CollectionViewController.h"
-#import "CollectionViewCell.h"
+#import "MovieCollectionViewController.h"
+#import "MovieCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
 
 
-@interface CollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
+@interface MovieCollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *moviesArrayProp;
 @property (strong, nonatomic) NSArray *filteredData;
+@property (weak, nonatomic) UIRefreshControl* refreshControl;
 
 @end
 
-@implementation CollectionViewController
+@implementation MovieCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,27 +32,37 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView insertSubview:refreshControl atIndex:0];
+    self.refreshControl = refreshControl;
     
+    [self fetchMovies: FALSE];
+}
+
+- (void) fetchMovies: (BOOL) isRefresh {
     // Callback for getting movie rating data from themoviedb.org and populating tableview w this data
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=aaef6e1a9cec569a711a7e7dddd52fca"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-           if (error != nil) {
-               NSLog(@"%@", [error localizedDescription]);
-               // Show loading error
-               [self networkError];
-           }
-           else {
-               [self loadData: data];
-               
-               // Init VC to have all data showing before any searches
-               self.filteredData = self.moviesArrayProp;
-           }
+        // Added dispatch call
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+                // Show loading error
+                [self presentNetworkErrorAlert];
+            }
+            else {
+                [self loadData: data];
+                
+                // Init VC to have all data showing before any searches
+                self.filteredData = self.moviesArrayProp;
+            }
+            if(isRefresh) {
+                // Tell the refreshControl to stop spinning
+                 [self.refreshControl endRefreshing];
+            }
+        });
        }];
     [task resume];
-
-    
 }
 
 
@@ -66,7 +77,7 @@
     [self.collectionView reloadData];
 }
 
-- (void) networkError {
+- (void) presentNetworkErrorAlert {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
                                    message:@"Movies failed to load. Check your connection."
                                    preferredStyle:UIAlertControllerStyleAlert];
@@ -85,7 +96,7 @@
 //MARK: Coll View
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCellID" forIndexPath:indexPath];
+    MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCellID" forIndexPath:indexPath];
     
     NSString *urlString = self.filteredData[indexPath.row][@"poster_path"];
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
@@ -104,60 +115,10 @@
 //MARK: Refresh
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-
-        // Create NSURL and NSURLRequest
-    
-    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=aaef6e1a9cec569a711a7e7dddd52fca"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    
-        session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-    
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    
-           // ... Use the new data to update the data source ...
-            if(error != nil) {
-                [refreshControl endRefreshing];
-                [self networkError];
-            }
-            else {
-                [self loadData:data];
-                // Reload the tableView now that there is new data
-                [self.collectionView reloadData];
-            }
-
-
-           // Tell the refreshControl to stop spinning
-            [refreshControl endRefreshing];
-
-        }];
-    
-        [task resume];
+    [self fetchMovies: TRUE];
 }
 
 //MARK: Search Bar
-
-//- (UICollectionReusableView *)supplementaryViewForElementKind:(NSString *)elementKind
-//                                                  atIndexPath:(NSIndexPath *)indexPath {
-//    if (elementKind == UICollectionElementKindSectionHeader) {
-//
-//        UICollectionReusableView *headerView =  [self.collectionView dequeueReusableSupplementaryViewOfKind:(NSString *)UICollectionElementKindSectionHeader withReuseIdentifier: @"CollectionViewHeader" forIndexPath:(NSIndexPath *)indexPath];
-//        return headerView;
-//
-//    }
-//
-//    return [[UICollectionReusableView alloc] init];
-//}
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//    UITableViewCell *cell = [self.collectionView dequeueReusableCellWithIdentifier:@"TableCell"
-//                                                                 forIndexPath:indexPath];
-//    cell.textLabel.text = self.filteredData[indexPath.row];
-//
-//    return cell;
-//}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     

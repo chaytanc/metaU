@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CollectionViewController : UIViewController
+@interface MovieCollectionViewController : UIViewController
 
 @end
 
