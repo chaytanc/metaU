@@ -9,26 +9,6 @@
 #import "TweetCell.h"
 #import "APIManager.h"
 
-//@protocol TweetProtocol <NSObject>
-//
-//@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-//// Header
-//@property (weak, nonatomic) IBOutlet UILabel *displayNameLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *createdAtLabel;
-//// Tweet
-//@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
-//@property (weak, nonatomic) Tweet* tweet;
-//// Buttons bar
-//@property (weak, nonatomic) IBOutlet UIButton *commentButton;
-//@property (weak, nonatomic) IBOutlet UILabel *numCommentsLabel;
-//@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
-//@property (weak, nonatomic) IBOutlet UILabel *numRetweetsLabel;
-//@property (weak, nonatomic) IBOutlet UIButton *favButton;
-//@property (weak, nonatomic) IBOutlet UILabel *numFavLabel;
-//@property (weak, nonatomic) IBOutlet UIButton *messageButton;
-//@end
-
 @implementation TweetCell
 
 - (void)awakeFromNib {

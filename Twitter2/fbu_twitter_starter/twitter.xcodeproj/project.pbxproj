@@ -56,6 +56,7 @@
 		9CF6C7EA28622550005FC69C /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		9CF6C7EE28626FC8005FC69C /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		9CF6C7EF28626FC8005FC69C /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		9CF6C7F128637794005FC69C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +112,7 @@
 				6AD278E620BC4B970085BC29 /* Info.plist */,
 				9CF6C7DE2861183E005FC69C /* Keys.plist */,
 				6AD278E720BC4B970085BC29 /* main.m */,
+				9CF6C7F128637794005FC69C /* README.md */,
 			);
 			path = twitter;
 			sourceTree = "<group>";

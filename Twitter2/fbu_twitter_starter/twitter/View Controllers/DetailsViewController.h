@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) Tweet* tweet;
 - (IBAction)didTapRetweet:(id)sender;
 - (IBAction)didTapFav:(id)sender;
+- (void)refreshData;
 
 
 @end

@@ -81,9 +81,7 @@
     
     if ([[segue identifier] isEqualToString:@"detailsSegue"])
     {
-        NSIndexPath *indexPath = [self.timelineTableView indexPathForCell:sender];
-        // if you need to pass data to the next controller do it here
-//        DetailsViewController *detailsController = [segue destinationViewController];
+        NSIndexPath *indexPath = (NSIndexPath *)sender;
         UINavigationController *navigationController = [segue destinationViewController];
         DetailsViewController *detailsController = (DetailsViewController*)navigationController.topViewController;
         detailsController.tweet = self.arrayOfTweets[indexPath.row];
@@ -137,7 +135,7 @@
     
     NSLog(@"Tapped tweet");
     NSLog(@"%@", self.arrayOfTweets[indexPath.row]);
-    [self performSegueWithIdentifier:@"detailsSegue" sender:self];
+    [self performSegueWithIdentifier:@"detailsSegue" sender:indexPath];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

@@ -47,7 +47,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="FTQ-G1-N2b" kind="presentation" identifier="loginSegue" id="CHf-4w-b5m"/>
+                        <segue destination="FTQ-G1-N2b" kind="show" identifier="loginSegue" id="CHf-4w-b5m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKJ-HH-8tn" sceneMemberID="firstResponder"/>
@@ -320,7 +320,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="edit-icon" id="hXF-BO-tYK" userLabel="composeButton">
                             <connections>
-                                <segue destination="zvs-9K-vxx" kind="presentation" identifier="composeSegue" id="5Rq-jP-IRx"/>
+                                <segue destination="zvs-9K-vxx" kind="show" identifier="composeSegue" id="5Rq-jP-IRx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -338,6 +338,7 @@
             <objects>
                 <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="FTQ-G1-N2b" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="uCT-74-KJA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ytz-Ev-cUB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -402,6 +403,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zvs-9K-vxx" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Lgn-AB-ypS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JoY-St-L0R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -472,7 +474,7 @@
                                         <rect key="frame" x="82.5" y="35.5" width="292.5" height="209"/>
                                         <color key="tintColor" systemColor="tintColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="Rr7-sP-VrS"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="Rr7-sP-VrS"/>
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="5" left="5" bottom="5" right="5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
