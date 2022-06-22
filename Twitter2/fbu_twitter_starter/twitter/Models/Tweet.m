@@ -37,7 +37,8 @@
         }
         //XXX what happens if it was a retweet?? By default a tweet's user is set to user unless it's a retweet in which case the user is 
         self.idStr = dictionary[@"id_str"];
-        self.text = dictionary[@"text"];
+//        self.text = dictionary[@"text"];
+        self.text = dictionary[@"full_text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];

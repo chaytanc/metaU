@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     self.timelineTableView.dataSource = self;
+    self.timelineTableView.delegate = self;
     
     // Refresh for the data in the tableview
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -77,14 +78,14 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //XXX How does this know what destinationVC is?? Shouldn't it be passed in to this method or something?
     
     if ([[segue identifier] isEqualToString:@"detailsSegue"])
     {
         NSIndexPath *indexPath = [self.timelineTableView indexPathForCell:sender];
-        //if you need to pass data to the next controller do it here
-        UINavigationController *detailsViewController = [segue destinationViewController];
-        DetailsViewController *detailsController = (DetailsViewController*)detailsViewController.topViewController;
+        // if you need to pass data to the next controller do it here
+//        DetailsViewController *detailsController = [segue destinationViewController];
+        UINavigationController *navigationController = [segue destinationViewController];
+        DetailsViewController *detailsController = (DetailsViewController*)navigationController.topViewController;
         detailsController.tweet = self.arrayOfTweets[indexPath.row];
     }
     else if ([[segue identifier] isEqualToString:@"composeSegue"]) {
@@ -133,9 +134,6 @@
 // MARK: Tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TweetCell *cell = [self.timelineTableView dequeueReusableCellWithIdentifier:@"tweetCell_ID" forIndexPath:indexPath];
-    // Keep color the same when selected
-    [cell setBackgroundColor:UIColor.systemBackgroundColor];
     
     NSLog(@"Tapped tweet");
     NSLog(@"%@", self.arrayOfTweets[indexPath.row]);
