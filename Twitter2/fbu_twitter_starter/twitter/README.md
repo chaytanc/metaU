@@ -25,13 +25,13 @@ The following **stretch** features are implemented:
 
 **A user could**
 
-- [ ] Be able to **unlike** or **un-retweet** by tapping a liked or retweeted Tweet button, respectively. (Doing so will decrement the count for each)
+- [x] Be able to **unlike** or **un-retweet** by tapping a liked or retweeted Tweet button, respectively. (Doing so will decrement the count for each)
 - [ ] Click on links that appear in Tweets
 - [ ] See embedded media in Tweets that contain images or videos
 - [ ] Reply to any Tweet (**2 points**)
   - Replies should be prefixed with the username
   - The `reply_id` should be set when posting the tweet
-- [ ] See a character count when composing a Tweet (as well as a warning) (280 characters) (**1 point**)
+- [x] See a character count when composing a Tweet (as well as a warning) (280 characters) (**1 point**)
 - [ ] Load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client
 - [ ] Click on a Profile image to reveal another user's profile page, including:
   - Header view: picture and tagline
@@ -46,19 +46,22 @@ The following **additional** features are implemented:
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
 1. Go over delegate protocol and make sure I understand it
-2. xxx todo
+2. How to bridge Swift code to Objective-C code (e.g. subclassing a swift class in an Obj-C interface maybe)
 
 ## Video Walkthrough XXX todo
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<!--<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />-->
+[App Demo](
 
-GIF created with [Kap](https://getkap.co/).
+GIF created with [RecordIt](https://recordit.co/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I spent a lot of time trying to get tweets to fully display text. What I attributed to the labels not wrapping long text and instead showing an ellipse was actually not correct. The problem was instead that the API call to twitter automatically compressed long tweets and literally provided text with "..." in it. I had to then figure out how to make a dictionary of parameters to pass in to the Twitter GET call such that I could set tweet_mode=extended. This allowed me to finally display all the text in a tweet.
+
+Another issue I spent time on was design decisions regarding whether to make the font size of display names shrink in order to fully display them or have them all stay at the same font size but possibly compress.
 
 ## Credits
 

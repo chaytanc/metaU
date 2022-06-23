@@ -35,22 +35,20 @@
             // Change tweet to original tweet
             dictionary = originalTweet;
         }
-        //XXX what happens if it was a retweet?? By default a tweet's user is set to user unless it's a retweet in which case the user is 
+  
         self.idStr = dictionary[@"id_str"];
-//        self.text = dictionary[@"text"];
         self.text = dictionary[@"full_text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
-        //XXX note that this does not currently work because it is a premium developer feature
+        //XXX note that this currently displays reply_count=0 because it is a premium developer feature
         self.commentCount = [dictionary[@"reply_count"] intValue];
 
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
         // Format and set createdAtString
         NSString *createdAtOriginalString = dictionary[@"created_at"];
         NSDateFormatter* formatter = [Tweet dateFormatter];
-//        [self setFormattedCreatedAtString: createdAtOriginalString formatter: formatter];
         [self setFormattedCreatedAtString:createdAtOriginalString :formatter];
 
     }

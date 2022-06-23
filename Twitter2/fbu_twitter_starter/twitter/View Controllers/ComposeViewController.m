@@ -20,17 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tweetTextView.delegate = self; // So we can set respond to editing and update char count
-    // Do any additional setup after loading the view.
-    
-    //XXX was trying to use RSKViewController for nicer looking
-//    self.textView.delegate = self;
-//    self.textView = RSKPlaceholderTextView(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 100))
-
-//    self.textView = [RSKPlaceholderTextView new frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 100]
-//    self.textView = [RSK]
-//    self.textView.placeholder = "What do you want to say about this event?"
-//    [self.view addSubview:self.textView];
-
 }
 
 /*

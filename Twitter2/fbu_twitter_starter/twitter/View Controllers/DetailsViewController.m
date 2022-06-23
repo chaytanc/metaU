@@ -19,7 +19,10 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+// In the will appear so that timeline updates when someone likes in details view but timeline has already loaded
+- (void)viewWillAppear:(BOOL)animated {
     [self formatTweet];
 }
 
@@ -45,12 +48,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-//- (IBAction)didTapFav:(id)sender {
-//}
-//
-//- (IBAction)didTapRetweet:(id)sender {
-//}
 
 //MARK: duplicate
 //XXX wanted to subclass TweetCell somehow to not have to copy paste here but couldn't figure out how since
@@ -98,6 +95,10 @@
 }
 
 // Uses the data in self.tweet to reload UI
+- (IBAction)didTapClose:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
 - (void)refreshData{
     NSString* username = [@"@" stringByAppendingString:self.tweet.user.screenName];
     self.userNameLabel.text = username;

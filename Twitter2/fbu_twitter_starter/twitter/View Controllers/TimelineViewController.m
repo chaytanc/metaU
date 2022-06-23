@@ -35,9 +35,12 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.timelineTableView insertSubview:refreshControl atIndex:0];
-//    [self.timelineTableView setAllowsSelection:NO];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [self fetchTweets];
+    [self.timelineTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,8 +86,10 @@
     
     if ([[segue identifier] isEqualToString:@"detailsSegue"])
     {
+
         NSIndexPath *indexPath = (NSIndexPath *)sender;
         UINavigationController *navigationController = [segue destinationViewController];
+        navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
         DetailsViewController *detailsController = (DetailsViewController*)navigationController.topViewController;
         detailsController.tweet = self.arrayOfTweets[indexPath.row];
     }
