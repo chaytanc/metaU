@@ -48,12 +48,11 @@ Please list two areas of the assignment you'd like to **discuss further with you
 1. Go over delegate protocol and make sure I understand it
 2. How to bridge Swift code to Objective-C code (e.g. subclassing a swift class in an Obj-C interface maybe)
 
-## Video Walkthrough XXX todo
+## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<!--<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />-->
-[App Demo](
+[App Demo](https://recordit.co/P40Y5qHsXr.gif)
 
 GIF created with [RecordIt](https://recordit.co/).
 
