@@ -49,15 +49,17 @@
     
     // Get timeline and print tweets that we found from the call
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-        if (tweets) {
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
-            self.arrayOfTweets = tweets; //XXX is this warning of "Incompatible pointer types assigning to 'NSMutableArray *' from 'NSArray *'" ok??
-        }
-        else {
-            [self presentNetworkErrorAlert];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+                if (tweets) {
+                    NSLog(@"😎😎😎 Successfully loaded home timeline");
+                    self.arrayOfTweets = tweets;
+                }
+                else {
+                    [self presentNetworkErrorAlert];
+                }
 
-        [self.timelineTableView reloadData];
+                [self.timelineTableView reloadData];
+        });
     }];
     
 }

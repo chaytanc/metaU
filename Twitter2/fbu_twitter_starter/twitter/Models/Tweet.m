@@ -49,22 +49,38 @@
         self.user = [[User alloc] initWithDictionary: dictionary[@"user"]];
         // Format and set createdAtString
         NSString *createdAtOriginalString = dictionary[@"created_at"];
-        [self setFormattedCreatedAtString: createdAtOriginalString];
+        NSDateFormatter* formatter = [Tweet dateFormatter];
+//        [self setFormattedCreatedAtString: createdAtOriginalString formatter: formatter];
+        [self setFormattedCreatedAtString:createdAtOriginalString :formatter];
 
     }
     return self;
 }
 
-- (void) setFormattedCreatedAtString: (NSString*) createdAtOriginalString {
-    // Format createdAt date string
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+NSString * const kCachedDateFormatterKey = @"CachedDateFormatterKey";
+
++ (NSDateFormatter *)dateFormatter {
+    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+    NSDateFormatter *formatter = [threadDictionary objectForKey:kCachedDateFormatterKey];
+    if (!formatter) {
+        formatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        [formatter setLocale:enUSPOSIXLocale];
+        // Configure the input format to parse the date string
+        formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
+        // Configure output format
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        [threadDictionary setObject:formatter forKey:kCachedDateFormatterKey];
+    }
+    return formatter;
+}
+
+- (void) setFormattedCreatedAtString: (NSString*) createdAtOriginalString: (NSDateFormatter *) formatter {
     // Configure the input format to parse the date string
     formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
     // Convert String to Date
     NSDate *date = [formatter dateFromString:createdAtOriginalString];
-    // Configure output format
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterNoStyle;
     self.createdAtString = date.shortTimeAgoSinceNow;
 }
 

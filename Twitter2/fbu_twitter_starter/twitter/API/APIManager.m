@@ -37,9 +37,6 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     NSString *key = [dict objectForKey:@"consumer_Key"];
     NSString *secret = [dict objectForKey:@"consumer_Secret"];
     
-//    NSString *key = [dict objectForKey:@"test_Key"];
-//    NSString *secret = [dict objectForKey:@"test_Secret"];
-    
     
     // Check for launch arguments override
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"consumer-key"]) {

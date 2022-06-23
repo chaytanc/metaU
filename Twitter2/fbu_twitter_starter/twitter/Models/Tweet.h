@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSMutableArray*)tweetsWithArray:(NSArray *)dictionaries;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
++ (NSDateFormatter *)dateFormatter;
+
 
 
 @end

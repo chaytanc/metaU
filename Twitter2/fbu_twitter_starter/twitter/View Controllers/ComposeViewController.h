@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ComposeViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
+@property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
 @property (weak, nonatomic) id<ComposeViewControllerDelegate> delegate;
 
 @end

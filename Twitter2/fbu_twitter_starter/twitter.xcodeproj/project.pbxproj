@@ -17,6 +17,7 @@
 		6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD278F520BCB68B0085BC29 /* APIManager.m */; };
 		6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790520BCC0380085BC29 /* LoginViewController.m */; };
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
+		9C8B614E2864DD1000C7D7A3 /* CustomTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B614D2864DD1000C7D7A3 /* CustomTextViewController.swift */; };
 		9CF6C7DF2861183E005FC69C /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CF6C7DE2861183E005FC69C /* Keys.plist */; };
 		9CF6C7E228611FBD005FC69C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6C7E128611FBD005FC69C /* User.m */; };
 		9CF6C7E528611FD1005FC69C /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF6C7E428611FD1005FC69C /* Tweet.m */; };
@@ -45,6 +46,8 @@
 		6AD2790720BCC04D0085BC29 /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		6AD2790820BCC04D0085BC29 /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		75895B6507775E8AFBEEA2D9 /* Pods-twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twitter/Pods-twitter.debug.xcconfig"; sourceTree = "<group>"; };
+		9C8B614C2864DD0F00C7D7A3 /* twitter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "twitter-Bridging-Header.h"; sourceTree = "<group>"; };
+		9C8B614D2864DD1000C7D7A3 /* CustomTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewController.swift; sourceTree = "<group>"; };
 		9CF6C7DE2861183E005FC69C /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		9CF6C7E028611FBD005FC69C /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = User.h; path = twitter/Models/User.h; sourceTree = SOURCE_ROOT; };
 		9CF6C7E128611FBD005FC69C /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = User.m; path = twitter/Models/User.m; sourceTree = SOURCE_ROOT; };
@@ -153,12 +156,14 @@
 			children = (
 				9CF6C7EF28626FC8005FC69C /* DetailsViewController.h */,
 				9CF6C7EE28626FC8005FC69C /* DetailsViewController.m */,
+				9C8B614D2864DD1000C7D7A3 /* CustomTextViewController.swift */,
 				9CF6C7E928622550005FC69C /* ComposeViewController.h */,
 				9CF6C7EA28622550005FC69C /* ComposeViewController.m */,
 				6AD2790420BCC0380085BC29 /* LoginViewController.h */,
 				6AD2790520BCC0380085BC29 /* LoginViewController.m */,
 				6AD2790720BCC04D0085BC29 /* TimelineViewController.h */,
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
+				9C8B614C2864DD0F00C7D7A3 /* twitter-Bridging-Header.h */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 				TargetAttributes = {
 					6AD278D420BC4B950085BC29 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -285,6 +291,7 @@
 			files = (
 				9CF6C7E82861391F005FC69C /* TweetCell.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
+				9C8B614E2864DD1000C7D7A3 /* CustomTextViewController.swift in Sources */,
 				9CF6C7F028626FC8005FC69C /* DetailsViewController.m in Sources */,
 				9CF6C7E228611FBD005FC69C /* User.m in Sources */,
 				9CF6C7EB28622550005FC69C /* ComposeViewController.m in Sources */,
@@ -434,8 +441,9 @@
 			baseConfigurationReference = 75895B6507775E8AFBEEA2D9 /* Pods-twitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7U2A6R77J6;
 				INFOPLIST_FILE = twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -443,6 +451,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "twitter/View Controllers/twitter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -452,8 +463,9 @@
 			baseConfigurationReference = 1397EA94AE1DE5F26C1724FD /* Pods-twitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7U2A6R77J6;
 				INFOPLIST_FILE = twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -461,6 +473,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "twitter/View Controllers/twitter-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

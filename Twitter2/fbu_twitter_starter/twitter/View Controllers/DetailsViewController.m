@@ -17,6 +17,7 @@
 @implementation DetailsViewController
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self formatTweet];
@@ -148,12 +149,14 @@
         self.tweet.favoriteCount += 1;
     }
     [[APIManager shared] tweetButtonRequest:self.tweet urlString:urlString completion:^(Tweet * tweet, NSError * error) {
-        if(error){
-             NSLog(@"Error toggling favorite on tweet: %@", error.localizedDescription);
-        }
-        else{
-            NSLog(@"Successfully toggled favorite on the Tweet: %@", tweet.text);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+                if(error){
+                     NSLog(@"Error toggling favorite on tweet: %@", error.localizedDescription);
+                }
+                else{
+                    NSLog(@"Successfully toggled favorite on the Tweet: %@", tweet.text);
+                }
+        });
     }];
 
     [self refreshData];
@@ -178,12 +181,14 @@
         self.tweet.retweetCount += 1;
     }
     [[APIManager shared] tweetButtonRequest:self.tweet urlString:urlString completion:^(Tweet * tweet, NSError * error) {
-        if(error){
-             NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
-        }
-        else{
-            NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(error){
+                 NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+            }
+            else{
+                NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
+            }
+        });
     }];
     [self refreshData];
 
