@@ -71,7 +71,7 @@
                     }
                     else {
                         NSLog(@"%@", error);
-                        [self presentNetworkErrorAlert];
+                        [self presentNetworkErrorAlert: error];
                     }
                 });
             }];
@@ -97,7 +97,8 @@
 }
 
 // NOTE: Ideally this func would be in some shared imported class since I had to copy paste it from timelineVC
-- (void) presentNetworkErrorAlert {
+- (void) presentNetworkErrorAlert: (NSError *) error {
+    NSLog(@"%@", error);
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
                                    message:@"Tweet failed to post. Check your connection."
                                    preferredStyle:UIAlertControllerStyleAlert];

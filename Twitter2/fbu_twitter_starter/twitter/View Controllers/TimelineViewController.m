@@ -58,7 +58,7 @@
                     self.arrayOfTweets = tweets;
                 }
                 else {
-                    [self presentNetworkErrorAlert];
+                    [self presentNetworkErrorAlert: error];
                 }
 
                 [self.timelineTableView reloadData];
@@ -67,7 +67,8 @@
     
 }
 
-- (void) presentNetworkErrorAlert {
+- (void) presentNetworkErrorAlert: (NSError*) error {
+    NSLog(@"%@", error);
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Network Error"
                                    message:@"Tweets failed to load. Check your connection."
                                    preferredStyle:UIAlertControllerStyleAlert];
@@ -125,7 +126,7 @@
             self.arrayOfTweets = tweets;
         }
         else {
-            [self presentNetworkErrorAlert];
+            [self presentNetworkErrorAlert: error];
         }
 
         [self.timelineTableView reloadData];
