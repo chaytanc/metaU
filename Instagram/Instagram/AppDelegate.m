@@ -46,6 +46,20 @@
     }];
 
     [Parse initializeWithConfiguration:config];
+    
+    // Test posting data
+//    PFObject *instaUser = [PFObject objectWithClassName:@"InstaUser"];
+//    instaUser[@"score"] = @1337;
+//    instaUser[@"username"] = @"@champagnepapi";
+//    instaUser[@"name"] = @"Drake";
+//    [instaUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (succeeded) {
+//            NSLog(@"Object saved!");
+//        } else {
+//            NSLog(@"Error: %@", error.description);
+//        }
+//    }];
+
 
     return YES;
 }
