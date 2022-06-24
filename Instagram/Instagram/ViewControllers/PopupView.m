@@ -14,9 +14,10 @@
 
 //@property (strong, nonatomic) UIView* container;
 @property (strong, nonatomic) UIButton* doneButton;
-@property (weak, nonatomic) UIButton* popupStackView;
-@property (weak, nonatomic) UITextField* emailField;
-@property (weak, nonatomic) UITextField* passwordField;
+@property (strong, nonatomic) UIButton* cancelButton;
+@property (strong, nonatomic) UIStackView* popupStackView;
+@property (strong, nonatomic) UITextField* emailField;
+@property (strong, nonatomic) UITextField* passwordField;
 
 @end
 
@@ -43,17 +44,12 @@
 //        [self.container.heightAnchor constraintEqualToAnchor:self.heightAnchor multiplier:0.5].active = YES;
 //        self.container.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
 
-        
-        UIStackView* popupStackView = [UIStackView new];
-        [popupStackView addArrangedSubview:self.doneButton];
-        popupStackView.translatesAutoresizingMaskIntoConstraints = NO;
-        popupStackView.axis = UILayoutConstraintAxisVertical;
-        popupStackView.distribution = UIStackViewDistributionFillEqually;
+
     
-        [self formatDoneButton];
 //        [self formatContainerView];
 //        [self addSubview:self.container];
-        [self addSubview:self.doneButton];
+//        [self addSubview:self.popupStackView];
+//        [self addSubview:self.doneButton];
         
         self.alpha = 0.5;
         self.backgroundColor = UIColor.greenColor;
@@ -62,6 +58,22 @@
            
     }
     return self;
+}
+
+//- (void) awakeFromNib {
+//    [super awakeFromNib];
+//    [self formatPopupStackView];
+//
+//}
+
+- (void) layoutSubviews {
+    [super layoutSubviews];
+    [self formatDoneButton];
+    [self formatEmailField];
+    [self formatPasswordField];
+    [self formatCancelButton];
+
+    [self formatPopupStackView];
 
 }
 //
@@ -99,7 +111,67 @@
     // TODO 
     NSLog(@"Done tapped!!!");
     //XXX todo if create user succeeds dismiss and go to home, otherwise present error and go to login
+    // Todo, disable signup button on login when popup is in view
     [self removeFromSuperview];
+    
+}
+
+- (void) formatCancelButton {
+    
+    self.cancelButton = [UIButton new];
+    self.cancelButton.titleLabel.text = @"Done";
+    self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.cancelButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[UIColor blueColor] forState: UIControlStateNormal];
+    [self.cancelButton addTarget:self
+                        action:@selector(cancelButtonPressed:)
+                        forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) cancelButtonPressed: (UIButton *) button {
+    // TODO
+    NSLog(@"Cancel tapped!!!");
+    [self removeFromSuperview];
+}
+
+- (void) formatEmailField {
+    self.emailField = [UITextField new];
+    self.emailField.placeholder = @"Email";
+}
+
+- (void) formatPasswordField {
+    self.passwordField = [UITextField new];
+    self.passwordField.placeholder = @"Create a password";
+    self.passwordField.backgroundColor = [UIColor whiteColor];
+//    self.passwordField.attributedPlaceholder
+}
+
+- (void) formatPopupStackView {
+    self.popupStackView = [UIStackView new];
+    [self.popupStackView addArrangedSubview: self.emailField];
+    [self.popupStackView addArrangedSubview: self.passwordField];
+    [self.popupStackView addArrangedSubview: self.doneButton];
+    [self.popupStackView addArrangedSubview: self.cancelButton];
+
+    self.popupStackView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.popupStackView.axis = UILayoutConstraintAxisVertical;
+    self.popupStackView.distribution = UIStackViewDistributionFillEqually;
+    self.popupStackView.backgroundColor = [UIColor blueColor];
+    
+    [self.popupStackView setLayoutMargins:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [self.popupStackView setLayoutMarginsRelativeArrangement:YES];
+    
+    [self addSubview:self.popupStackView];
+    // Constrain to sides
+    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+
+//        [self.popupStackView.heightAnchor constraintEqualToConstant:self.frame.size.height].active = true;
+//        [self.popupStackView.widthAnchor constraintEqualToConstant:self.frame.size.width].active = true;
+    
+    [self addConstraints:@[left, top, right, bottom]];
     
 }
 
@@ -114,7 +186,6 @@
 
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        //XXX add dispatch later
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else {

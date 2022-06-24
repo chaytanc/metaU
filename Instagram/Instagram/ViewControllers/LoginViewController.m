@@ -65,17 +65,31 @@
     }];
 }
 
+//XXX working here on center x constraints!!!
+
 - (IBAction)didTapSignup:(id)sender {
     NSLog(@"Sign up tapped");
     UIView* popup = [PopupView new];
     [self.view addSubview:popup];
-    popup.frame = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 150, 150);
+
+    int frameHeight = 250;
+    int frameWidth = 180;
+    popup.frame = CGRectMake(self.view.center.x - (frameWidth/2), self.view.center.y - (frameHeight/2), frameWidth, frameHeight);
+//    [popup.superview addConstraint:[NSLayoutConstraint
+//        constraintWithItem:popup.superview
+//        attribute:NSLayoutAttributeCenterX
+//        relatedBy:NSLayoutRelationEqual
+//        toItem:popup
+//        attribute:NSLayoutAttributeCenterX
+//        multiplier:1.0
+//        constant:0.0]];
+
 //    NSLayoutConstraint *centerXConstraint = [popup.centerXAnchor constraintEqualToAnchor:.centerXAnchor];
-    NSLayoutConstraint *centerXConstraint = [self.view.centerXAnchor constraintEqualToAnchor: popup.centerXAnchor];
-    
-    centerXConstraint.active = YES;
-    [NSLayoutConstraint activateConstraints:@[centerXConstraint]];
-    [self.view addConstraint:centerXConstraint];
+//    NSLayoutConstraint *centerXConstraint = [self.view.centerXAnchor constraintEqualToAnchor: popup.centerXAnchor];
+//
+//    centerXConstraint.active = YES;
+//    [NSLayoutConstraint activateConstraints:@[centerXConstraint]];
+//    [self.view addConstraint:centerXConstraint];
      
     
 //    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:100];
@@ -94,7 +108,7 @@
     [UIView animateWithDuration:1 animations:^{
         // animations
 //        popup.transform = .identity
-        popup.alpha = 0.75;
+        popup.alpha = 0.85;
     }];
 }
 
