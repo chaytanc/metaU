@@ -9,6 +9,7 @@
 #import "Parse/Parse.h"
 #import "HomeViewController.h"
 #import "PopupView.h"
+#import "SnapKit/SnapKit-Swift.h"
 
 @interface LoginViewController ()
 
@@ -53,6 +54,7 @@
     NSString *password = self.passwordField.text;
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+        //XXX add dispatch later
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
         } else {
@@ -66,9 +68,25 @@
 - (IBAction)didTapSignup:(id)sender {
     NSLog(@"Sign up tapped");
     UIView* popup = [PopupView new];
-    popup.frame = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 150, 150);
     [self.view addSubview:popup];
-    //XXX this does not currently show anything on the LoginVC when I tap sign up but does run this code
+    popup.frame = CGRectMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2, 150, 150);
+//    NSLayoutConstraint *centerXConstraint = [popup.centerXAnchor constraintEqualToAnchor:.centerXAnchor];
+    NSLayoutConstraint *centerXConstraint = [self.view.centerXAnchor constraintEqualToAnchor: popup.centerXAnchor];
+    
+    centerXConstraint.active = YES;
+    [NSLayoutConstraint activateConstraints:@[centerXConstraint]];
+    [self.view addConstraint:centerXConstraint];
+     
+    
+//    NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:100];
+//    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:100];
+//
+//    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50];
+//    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50];
+//    [self.view addConstraints:@[left, top]];
+//    [view addConstraints:@[height, width]];
+
+    
     
     //XXX eventually working to get transformation
 //    popup.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
@@ -76,7 +94,7 @@
     [UIView animateWithDuration:1 animations:^{
         // animations
 //        popup.transform = .identity
-        popup.alpha = 1;
+        popup.alpha = 0.75;
     }];
 }
 

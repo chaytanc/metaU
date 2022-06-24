@@ -28,4 +28,6 @@
 }
 */
 
+- (IBAction)didTapLogout:(id)sender {
+}
 @end
