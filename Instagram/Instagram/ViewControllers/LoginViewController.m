@@ -9,7 +9,9 @@
 #import "Parse/Parse.h"
 #import "HomeViewController.h"
 #import "PopupView.h"
-#import "SnapKit/SnapKit-Swift.h"
+#import "AppDelegate.h"
+#import "UIViewController+PresentError.h"
+
 
 @interface LoginViewController ()
 
@@ -25,18 +27,6 @@
 
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-
 // Dismiss keyboard when return button is hit
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -44,37 +34,43 @@
     return YES;
 }
 
-//XXX TODO LOGOUT
-//[PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-//    // PFUser.current() will now be nil
-//}];
-
 - (void)loginUser {
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-        //XXX add dispatch later
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {        
+        // Username: Test, Password: Test
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
+            [self presentError:@"Login failed" message:@"Failed to login." error:error];
         } else {
             NSLog(@"User logged in successfully");
+//            UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+//            id<UIWindowSceneDelegate> sceneDelegate = [UIApplication sharedApplication].delegate;
+            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+
+//            id<UIApplicationDelegate> appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabViewController"];
             
-            // display view controller that needs to shown after successful login
+//            window.window.rootViewController = homeViewController;
+            
+//            sceneDelegate.window.rootViewController = homeViewController;
+            appDelegate.window.rootViewController = homeViewController;
         }
     }];
 }
-
-//XXX working here on center x constraints!!!
 
 - (IBAction)didTapSignup:(id)sender {
     NSLog(@"Sign up tapped");
     UIView* popup = [PopupView new];
     [self.view addSubview:popup];
 
-    int frameHeight = 250;
-    int frameWidth = 180;
+    int frameHeight = self.view.frame.size.height * 0.80;
+    int frameWidth = self.view.frame.size.width * 0.80;
     popup.frame = CGRectMake(self.view.center.x - (frameWidth/2), self.view.center.y - (frameHeight/2), frameWidth, frameHeight);
+
 //    [popup.superview addConstraint:[NSLayoutConstraint
 //        constraintWithItem:popup.superview
 //        attribute:NSLayoutAttributeCenterX
@@ -108,7 +104,7 @@
     [UIView animateWithDuration:1 animations:^{
         // animations
 //        popup.transform = .identity
-        popup.alpha = 0.85;
+        popup.alpha = 0.95;
     }];
 }
 

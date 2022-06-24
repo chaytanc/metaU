@@ -8,14 +8,15 @@
 #import "PopupView.h"
 #import "Parse/Parse.h"
 #import "HomeViewController.h"
-#import "SnapKit/SnapKit-Swift.h"
+#import "AppDelegate.h"
 
 @interface PopupView ()
 
-//@property (strong, nonatomic) UIView* container;
+@property (strong, nonatomic) UILabel* titleLabel;
 @property (strong, nonatomic) UIButton* doneButton;
 @property (strong, nonatomic) UIButton* cancelButton;
 @property (strong, nonatomic) UIStackView* popupStackView;
+@property (strong, nonatomic) UITextField* usernameField;
 @property (strong, nonatomic) UITextField* emailField;
 @property (strong, nonatomic) UITextField* passwordField;
 
@@ -23,52 +24,33 @@
 
 @implementation PopupView
 
-//UIView *picker = [[UIView alloc] initWithFrame:self.view.bounds];
-//picker.backgroundColor=[UIColor blueColor];
-//[self.view addSubview: picker];
-
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-
-        
-        // Working to get contraints
-        //XXX causes error: "Unable to activate constraint with anchors <NSLayoutXAxisAnchor:0x600003dd1a40 \"PopupView:0x160b052a0.centerX\"> and <NSLayoutXAxisAnchor:0x600003dd1c40 \"UIView:0x160b05630.centerX\"> because they have no common ancestor.  Does the constraint or its anchors reference items in different view hierarchies?  That's illegal."
-//        NSLayoutConstraint *centerXConstraint = [self.centerXAnchor constraintEqualToAnchor:.centerXAnchor];
-//        centerXConstraint.active = YES;
-//        self.container.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        self.container.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//        self.container.centerX
-//        [self.container.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier:0.7].active = YES;
-//        [self.container.heightAnchor constraintEqualToAnchor:self.heightAnchor multiplier:0.5].active = YES;
-//        self.container.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
-
-
-    
-//        [self formatContainerView];
-//        [self addSubview:self.container];
-//        [self addSubview:self.popupStackView];
-//        [self addSubview:self.doneButton];
         
         self.alpha = 0.5;
         self.backgroundColor = UIColor.greenColor;
         self.layer.cornerRadius = 24;
-        self.clipsToBounds = TRUE;
+//        self.clipsToBounds = TRUE;
+//        [self.layer setShadowColor:([UIColor lightGrayColor])];
+        //XXX shadow not showing up
+//        [self.layer setShadowColor:CGColorCreateSRGB(100, 100, 1, 1)];
+        [self.layer setShadowColor:[[UIColor systemCyanColor] CGColor]];
+        [self.layer setShadowOffset:CGSizeMake(5, 5)];
+        [self.layer setShadowRadius:5];
+        [self.layer setShadowOpacity:0.9];
            
     }
     return self;
 }
 
-//- (void) awakeFromNib {
-//    [super awakeFromNib];
-//    [self formatPopupStackView];
-//
-//}
-
 - (void) layoutSubviews {
     [super layoutSubviews];
+    // Frame based layouts here
+    [self formatTitleLabel];
     [self formatDoneButton];
+    [self formatUsernameField];
     [self formatEmailField];
     [self formatPasswordField];
     [self formatCancelButton];
@@ -76,32 +58,40 @@
     [self formatPopupStackView];
 
 }
-//
-//- (void) formatContainerView {
-//    //        self.container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-////    self.container = [[UILabel alloc] initWithFrame:self.bounds];
-//    self.container = [UIView new];
-//
-//    // CGRect is x, y, width, height
-//    self.container.backgroundColor = [UIColor blackColor];
-//    UILabel* test = [UILabel new];
-//    test.text = @"test";
-//    test.textColor = [UIColor blackColor];
-//    [self.container addSubview:test];
-////    self.container.textColor = [UIColor whiteColor];
-////    self.container.text = @"Test";
-//    self.container.translatesAutoresizingMaskIntoConstraints = NO;
-//    self.container.layer.cornerRadius = 24;
-//
-//}
+
+// XXX todo later, rounded corners don't work if no clipping to bounds for shadow so make separate view
+- (void) formatRoundedCornersMask {
+//    // add the border to subview
+//    let borderView = UIView()
+//    borderView.frame = baseView.bounds
+//    borderView.layer.cornerRadius = 10
+//    borderView.layer.borderColor = UIColor.black.cgColor
+//    borderView.layer.borderWidth = 1.0
+//    borderView.layer.masksToBounds = true
+//    baseView.addSubview(borderView)
+}
+
+- (void) formatTitleLabel {
+    self.titleLabel = [UILabel new];
+    self.titleLabel.text = @"Create an account";
+    [UIFontDescriptor new];
+    UIFont* font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:19];
+    [self.titleLabel setFont:font];
+    self.titleLabel.textColor = [UIColor blackColor];
+//    self.titleLabel.numberOfLines = 0;
+//    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.titleLabel.minimumScaleFactor = 0.6;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.titleLabel]
+//    UIFontTextStyleTitle1
+}
 
 - (void) formatDoneButton {
     
     self.doneButton = [UIButton new];
-    self.doneButton.titleLabel.text = @"Done";
     self.doneButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.doneButton setTitle:@"Sign Up" forState:UIControlStateNormal];
-    [self.doneButton setTitleColor:[UIColor blueColor] forState: UIControlStateNormal];
+    [self.doneButton setTitleColor:[UIColor systemBlueColor] forState: UIControlStateNormal];
     [self.doneButton addTarget:self
                         action:@selector(doneButtonPressed:)
                         forControlEvents:UIControlEventTouchUpInside];
@@ -112,17 +102,16 @@
     NSLog(@"Done tapped!!!");
     //XXX todo if create user succeeds dismiss and go to home, otherwise present error and go to login
     // Todo, disable signup button on login when popup is in view
-    [self removeFromSuperview];
-    
+    [self registerUser];
 }
 
 - (void) formatCancelButton {
     
     self.cancelButton = [UIButton new];
-    self.cancelButton.titleLabel.text = @"Done";
+    self.cancelButton.titleLabel.textColor = [UIColor systemBlueColor];
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.cancelButton setTitle:@"Sign Up" forState:UIControlStateNormal];
-    [self.cancelButton setTitleColor:[UIColor blueColor] forState: UIControlStateNormal];
+    [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[UIColor systemBlueColor] forState: UIControlStateNormal];
     [self.cancelButton addTarget:self
                         action:@selector(cancelButtonPressed:)
                         forControlEvents:UIControlEventTouchUpInside];
@@ -136,18 +125,23 @@
 
 - (void) formatEmailField {
     self.emailField = [UITextField new];
-    self.emailField.placeholder = @"Email";
+    self.emailField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName: [UIColor systemCyanColor]}];
 }
 
 - (void) formatPasswordField {
     self.passwordField = [UITextField new];
-    self.passwordField.placeholder = @"Create a password";
-    self.passwordField.backgroundColor = [UIColor whiteColor];
-//    self.passwordField.attributedPlaceholder
+    self.passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Create a password" attributes:@{NSForegroundColorAttributeName: [UIColor systemCyanColor]}];
+}
+
+- (void) formatUsernameField {
+    self.usernameField = [UITextField new];
+    self.usernameField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Set a username" attributes:@{NSForegroundColorAttributeName: [UIColor systemCyanColor]}];
 }
 
 - (void) formatPopupStackView {
     self.popupStackView = [UIStackView new];
+    [self.popupStackView addArrangedSubview:self.titleLabel];
+    [self.popupStackView addArrangedSubview: self.usernameField];
     [self.popupStackView addArrangedSubview: self.emailField];
     [self.popupStackView addArrangedSubview: self.passwordField];
     [self.popupStackView addArrangedSubview: self.doneButton];
@@ -156,7 +150,7 @@
     self.popupStackView.translatesAutoresizingMaskIntoConstraints = NO;
     self.popupStackView.axis = UILayoutConstraintAxisVertical;
     self.popupStackView.distribution = UIStackViewDistributionFillEqually;
-    self.popupStackView.backgroundColor = [UIColor blueColor];
+    self.popupStackView.backgroundColor = [UIColor whiteColor];
     
     [self.popupStackView setLayoutMargins:UIEdgeInsetsMake(8, 8, 8, 8)];
     [self.popupStackView setLayoutMarginsRelativeArrangement:YES];
@@ -180,22 +174,42 @@
     PFUser *newUser = [PFUser user];
 
 //    // set user properties
-//    newUser.username = self.usernameField.text;
-//    newUser.email = self.emailField.text;
-//    newUser.password = self.passwordField.text;
+    newUser.username = self.usernameField.text;
+    newUser.email = self.emailField.text;
+    newUser.password = self.passwordField.text;
 
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
+            [self presentRegisterErrorAlert:error];
         } else {
             NSLog(@"User registered successfully");
-
+            
+            [self removeFromSuperview];
             // manually segue to logged in view
+            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            HomeViewController *homeVC = [storyboard instantiateViewControllerWithIdentifier:@"HomeVC"];
+            HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabViewController"];
+            appDelegate.window.rootViewController = homeViewController;
         }
     }];
+}
+
+
+- (void) presentRegisterErrorAlert: (NSError*) error {
+    NSLog(@"%@", error);
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Registration Error"
+                                   message:@"Failed to register user."
+                                   preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+       handler:^(UIAlertAction * action) {}];
+
+    [alert addAction:defaultAction];
+    UIViewController *root = (AppDelegate *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    [root presentViewController:alert animated:YES completion:nil];
+
 }
 
 

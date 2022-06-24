@@ -43,7 +43,7 @@
         <!--Home View Controller-->
         <scene sceneID="7cU-KV-q0y">
             <objects>
-                <viewController storyboardIdentifier="HomeVC" title="Home View Controller" id="O7y-Cm-Ee3" userLabel="Home View Controller" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" title="Home View Controller" id="O7y-Cm-Ee3" userLabel="Home View Controller" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vcm-nr-4C8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
                             <constraint firstItem="myQ-U9-BkB" firstAttribute="trailing" secondItem="uui-Dx-AUV" secondAttribute="trailing" id="XUu-sT-dfG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="VEH-mq-uXU">
+                    <navigationItem key="navigationItem" title="Feed" id="VEH-mq-uXU">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="ptL-88-eJR" userLabel="logoutButton">
                             <connections>
                                 <action selector="didTapLogout:" destination="O7y-Cm-Ee3" id="JE5-c2-DUr"/>
@@ -153,6 +153,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="feedTableView" destination="PAS-Ny-fTk" id="8r2-Qd-CIC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yky-XZ-Syt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,7 +239,7 @@
         <!--Login View Controller-->
         <scene sceneID="R4n-w9-nlh">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" id="Lnf-Kn-fYg" userLabel="Login View Controller" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="Lnf-Kn-fYg" userLabel="Login View Controller" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ODo-gh-Aed">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -501,7 +504,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Jek-0g-sNc">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Ny0-Ja-uDE" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabViewController" automaticallyAdjustsScrollViewInsets="NO" id="Ny0-Ja-uDE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hxM-VG-Dv7">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
