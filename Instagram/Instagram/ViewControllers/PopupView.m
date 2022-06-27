@@ -190,7 +190,7 @@
             // manually segue to logged in view
             AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabViewController"];
+            HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
             appDelegate.window.rootViewController = homeViewController;
         }
     }];
@@ -200,7 +200,7 @@
 - (void) presentRegisterErrorAlert: (NSError*) error {
     NSLog(@"%@", error);
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Registration Error"
-                                   message:@"Failed to register user."
+                                                                   message:error.localizedDescription
                                    preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault

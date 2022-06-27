@@ -84,13 +84,11 @@
 // MARK: Tableview
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    // Pass post data for particular cell to HomePicCell
     Post *post = self.posts[indexPath.row];
     HomePicCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"homePicCell" forIndexPath:indexPath];
-    // Passes tweet data to TweetCell
     cell.post = post;
-
-//    [cell formatHeaderAndBody];
-//    [cell formatFooter];
     [cell refreshData];
         
     return cell;

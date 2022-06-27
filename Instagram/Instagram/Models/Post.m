@@ -55,7 +55,6 @@
     if (!imageData) {
         return nil;
     }
-    //XXX is this naming it image.png or referencing a file presumed to already exist?
     PFFileObject* file = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
     return file;
 }

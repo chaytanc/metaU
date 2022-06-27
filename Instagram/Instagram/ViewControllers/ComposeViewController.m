@@ -53,18 +53,6 @@
 
 // todo tap imageview and pull up imagepickercontroller again
 - (void) addImageTapRecognizer {
-    
-//    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-//    imageView.isUserInteractionEnabled = true
-//    imageView.addGestureRecognizer(tapGestureRecognizer)
-//
-//
-//@objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-//{
-//    let tappedImage = tapGestureRecognizer.view as! UIImageView
-//
-//    // Your action
-//}
     [self.picImageView setUserInteractionEnabled:YES];
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer new] initWithTarget:self action:@selector(imageTapped:)];
     [self.picImageView addGestureRecognizer:tapGesture];
@@ -82,10 +70,11 @@
         if(succeeded) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UITabBarController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
+            homeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:homeViewController animated:YES completion:nil];
         }
         else {
-            [self presentError:@"Failed to Post" message:@"Check your network connection and try again." error:error];
+            [self presentError:@"Failed to Post" message:error.localizedDescription error:error];
         }
     }];
 }
