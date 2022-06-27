@@ -5,8 +5,8 @@
 //  Created by Chaytan Inman on 6/24/22.
 //
 
-#import "profileImagesCellCollectionViewCell.h"
+#import "ProfileImagesCellCollectionViewCell.h"
 
-@implementation profileImagesCellCollectionViewCell
+@implementation ProfileImagesCellCollectionViewCell
 
 @end

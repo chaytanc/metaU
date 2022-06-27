@@ -14,20 +14,25 @@
 #import "Post.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface HomeViewController () <UITableViewDataSource>
-@property (nonatomic, weak) NSArray* posts;
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) NSArray* posts;
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.feedTableView.dataSource = self;
+    self.feedTableView.delegate = self;
     // Do any additional setup after loading the view.
     // Refresh for the data in the tableview
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.feedTableView insertSubview:refreshControl atIndex:0];
-    [self reloadData];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self fetchPosts];
 }
 
 - (void) fetchPosts {
@@ -48,17 +53,12 @@
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.feedTableView reloadData];
     }];
 }
 
-- (void) reloadData {
-    [self fetchPosts];
-    [self.feedTableView reloadData];
-    
-}
-
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    [self reloadData];
+    [self fetchPosts];
     [refreshControl endRefreshing];
 }
 
@@ -89,14 +89,6 @@
     // Passes tweet data to TweetCell
     cell.post = post;
 
-    // set profile pic
-    NSString *URLString = post.image.url;
-    NSURL *url = [NSURL URLWithString:URLString];
-    [cell.picImageView setImageWithURL: url];
-    // Make it a circle
-    [cell.picImageView.layer setCornerRadius:cell.picImageView.frame.size.width/20];
-    [cell.picImageView.layer setMasksToBounds:YES];
-
 //    [cell formatHeaderAndBody];
 //    [cell formatFooter];
     [cell refreshData];
@@ -106,6 +98,27 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
+}
+
+// MARK: Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = (NSIndexPath *)sender;
+    UINavigationController *navigationController = [segue destinationViewController];
+    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+//
+//    if ([[segue identifier] isEqualToString:@"composeSegue"])
+//    {
+//
+//
+//        DetailsViewController *detailsController = (DetailsViewController*)navigationController.topViewController;
+//        detailsController.tweet = self.arrayOfTweets[indexPath.row];
+//    }
+//    else if ([[segue identifier] isEqualToString:@"composeSegue"]) {
+//        UINavigationController *navigationController = [segue destinationViewController];
+//        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+//        // Tell composeController we can receive info about tweet composed
+//        composeController.delegate = self;
+//    }
 }
 
 @end

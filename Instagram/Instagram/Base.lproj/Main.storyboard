@@ -56,33 +56,34 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homePicCell" id="Orp-eh-yTB" customClass="HomePicCell">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="217"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="442"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Orp-eh-yTB" id="qPk-uX-47w">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="442"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYz-Wz-QB8" userLabel="contentView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="442"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cfa-pl-t8G" userLabel="cellStackView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="442"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hO7-bi-nTd" userLabel="picStackView">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="175.5"/>
+                                                                            <rect key="frame" x="8" y="8" width="398" height="375"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aah-oi-vHI" userLabel="spacerView">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="119.5" height="175.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="11.5" height="375"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
-                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jha-5O-sss" userLabel="picImageView">
-                                                                                    <rect key="frame" x="119.5" y="0.0" width="175.5" height="175.5"/>
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Jha-5O-sss" userLabel="picImageView">
+                                                                                    <rect key="frame" x="11.5" y="0.0" width="375" height="375"/>
                                                                                     <constraints>
+                                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="Y2g-we-xgx"/>
                                                                                         <constraint firstAttribute="width" secondItem="Jha-5O-sss" secondAttribute="height" multiplier="1:1" id="ynl-QH-5ov"/>
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUY-uT-ea5" userLabel="spacerView">
-                                                                                    <rect key="frame" x="295" y="0.0" width="119" height="175.5"/>
+                                                                                    <rect key="frame" x="386.5" y="0.0" width="11.5" height="375"/>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 </view>
                                                                             </subviews>
@@ -91,18 +92,27 @@
                                                                             </constraints>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pr-FH-NYW" userLabel="authorLabel">
-                                                                            <rect key="frame" x="0.0" y="175.5" width="414" height="21"/>
+                                                                            <rect key="frame" x="8" y="383" width="398" height="30"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="30" id="TMQ-Ge-NgT"/>
+                                                                            </constraints>
+                                                                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyR-AG-6HQ" userLabel="captionLabel">
-                                                                            <rect key="frame" x="0.0" y="196.5" width="414" height="20.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyR-AG-6HQ" userLabel="captionLabel">
+                                                                            <rect key="frame" x="8" y="413" width="398" height="21"/>
+                                                                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="VyR-AG-6HQ" firstAttribute="top" secondItem="1pr-FH-NYW" secondAttribute="bottom" id="FcT-mh-TSt"/>
+                                                                    </constraints>
+                                                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                                                 </stackView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -179,7 +189,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6O-YX-q6x" userLabel="containerView">
                                 <rect key="frame" x="0.0" y="56" width="414" height="124"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hsB-PN-f9g" userLabel="picImageView">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="hsB-PN-f9g" userLabel="picImageView">
                                         <rect key="frame" x="8" y="0.0" width="124" height="124"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hsB-PN-f9g" secondAttribute="height" multiplier="1:1" id="aeh-ch-KxN"/>
@@ -452,7 +462,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="profileImagesCell" id="U3K-MI-Mvl" customClass="profileImagesCellCollectionViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="profileImagesCell" id="U3K-MI-Mvl" customClass="ProfileImagesCellCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="t6l-w8-UOm">
@@ -489,9 +499,7 @@
                             <constraint firstItem="4wm-lC-xLa" firstAttribute="top" secondItem="qTm-A4-acO" secondAttribute="bottom" id="wxX-TA-ZVA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="1Jn-qV-b8L">
-                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="Fw2-93-I8s" userLabel="backButton"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Profile" id="1Jn-qV-b8L"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="leftNumDescLabel" destination="lpc-eI-dVi" id="jOE-dN-knq"/>
@@ -586,8 +594,8 @@
     </scenes>
     <resources>
         <image name="Icon-60" width="60" height="60"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="feed_tab" width="25" height="25"/>
+        <image name="image_placeholder" width="375" height="375"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="profile_tab" width="25" height="25"/>
         <systemColor name="labelColor">

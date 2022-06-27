@@ -11,7 +11,7 @@
 		999EFB686BB93CBA6C565056 /* Pods_Instagram_InstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D330ACA3AAB9A012B61D50F /* Pods_Instagram_InstagramUITests.framework */; };
 		9C74E4A62865477C003FFFF7 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4A52865477C003FFFF7 /* ComposeViewController.m */; };
 		9C74E4A928661939003FFFF7 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4A828661939003FFFF7 /* ProfileViewController.m */; };
-		9C74E4AD28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4AC28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.m */; };
+		9C74E4AD28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4AC28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m */; };
 		9C74E4B028661B29003FFFF7 /* HomePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4AF28661B29003FFFF7 /* HomePicCell.m */; };
 		9C74E4B528665F4C003FFFF7 /* UIViewController+PresentError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */; };
 		9C8B61412863CAD500C7D7A3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61402863CAD500C7D7A3 /* LoginViewController.m */; };
@@ -58,8 +58,8 @@
 		9C74E4A52865477C003FFFF7 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		9C74E4A728661939003FFFF7 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		9C74E4A828661939003FFFF7 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		9C74E4AB28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profileImagesCellCollectionViewCell.h; sourceTree = "<group>"; };
-		9C74E4AC28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = profileImagesCellCollectionViewCell.m; sourceTree = "<group>"; };
+		9C74E4AB28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileImagesCellCollectionViewCell.h; sourceTree = "<group>"; };
+		9C74E4AC28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileImagesCellCollectionViewCell.m; sourceTree = "<group>"; };
 		9C74E4AE28661B29003FFFF7 /* HomePicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePicCell.h; sourceTree = "<group>"; };
 		9C74E4AF28661B29003FFFF7 /* HomePicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePicCell.m; sourceTree = "<group>"; };
 		9C74E4B328665F4C003FFFF7 /* UIViewController+PresentError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentError.h"; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 			children = (
 				9C74E4AE28661B29003FFFF7 /* HomePicCell.h */,
 				9C74E4AF28661B29003FFFF7 /* HomePicCell.m */,
-				9C74E4AB28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.h */,
-				9C74E4AC28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.m */,
+				9C74E4AB28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.h */,
+				9C74E4AC28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m */,
 				9C74E4B328665F4C003FFFF7 /* UIViewController+PresentError.h */,
 				9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */,
 			);
@@ -484,7 +484,7 @@
 			files = (
 				9C8B61472863CE8000C7D7A3 /* PopupView.m in Sources */,
 				9C74E4A928661939003FFFF7 /* ProfileViewController.m in Sources */,
-				9C74E4AD28661A3C003FFFF7 /* profileImagesCellCollectionViewCell.m in Sources */,
+				9C74E4AD28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m in Sources */,
 				9C8B61412863CAD500C7D7A3 /* LoginViewController.m in Sources */,
 				9C74E4A62865477C003FFFF7 /* ComposeViewController.m in Sources */,
 				9C74E4B528665F4C003FFFF7 /* UIViewController+PresentError.m in Sources */,

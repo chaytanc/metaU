@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) Post* post;
 
 - (void) refreshData;
+- (void) formatAuthorLabel;
+- (void) formatCaptionLabel;
+- (void) formatPicImageView;
 
 @end
 

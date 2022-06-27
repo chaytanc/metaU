@@ -10,8 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *picImageView;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 - (IBAction)didTapLogout:(id)sender;
 

@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface profileImagesCellCollectionViewCell : UICollectionViewCell
+@interface ProfileImagesCellCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *profileImagesImageView;
 
 @end
