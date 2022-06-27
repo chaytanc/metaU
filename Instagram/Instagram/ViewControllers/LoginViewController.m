@@ -9,7 +9,7 @@
 #import "Parse/Parse.h"
 #import "HomeViewController.h"
 #import "PopupView.h"
-#import "AppDelegate.h"
+#import "SceneDelegate.h"
 #import "UIViewController+PresentError.h"
 
 
@@ -45,19 +45,14 @@
             [self presentError:@"Login failed" message:@"Failed to login." error:error];
         } else {
             NSLog(@"User logged in successfully");
-//            UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-//            id<UIWindowSceneDelegate> sceneDelegate = [UIApplication sharedApplication].delegate;
-            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-
-
-//            id<UIApplicationDelegate> appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            
+            SceneDelegate *sceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+            
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabViewController"];
-            
-//            window.window.rootViewController = homeViewController;
-            
-//            sceneDelegate.window.rootViewController = homeViewController;
-            appDelegate.window.rootViewController = homeViewController;
+            UITabBarController *homeViewController = (UITabBarController*) [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
+
+                
+            [sceneDelegate.window setRootViewController:homeViewController];
         }
     }];
 }

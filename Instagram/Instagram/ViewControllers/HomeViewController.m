@@ -8,7 +8,6 @@
 #import "HomeViewController.h"
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
-#import "AppDelegate.h"
 #import "SceneDelegate.h"
 #import "UIViewController+PresentError.h"
 
@@ -22,9 +21,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // Refresh for the data in the tableview
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-//    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-//    [self. insertSubview:refreshControl atIndex:0];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.feedTableView insertSubview:refreshControl atIndex:0];
+}
+
+- (void) reloadData {
+    
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    
+    [self reloadData];
+    [self.feedTableView reloadData];
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -35,20 +44,12 @@
             [self presentError:@"Logout Failed" message:@"Unable to logout user." error:error];
         }
         else {
-            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//            appDelegate.window.rootViewController
-//            id<UIWindowSceneDelegate> sceneDelegate = [UIApplication sharedApplication].delegate;
-//            UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+            SceneDelegate *sceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-            
-//            window.window.rootViewController = loginViewController;
-//            [window.window setRootViewController:loginViewController];
 
-            
-            appDelegate.window.rootViewController = loginViewController;
-//            sceneDelegate.window.rootViewController = loginViewController;
+            [sceneDelegate.window setRootViewController:loginViewController];
 
         }
     }];
