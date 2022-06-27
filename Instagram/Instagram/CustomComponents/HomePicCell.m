@@ -6,6 +6,7 @@
 //
 
 #import "HomePicCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation HomePicCell
 
@@ -19,5 +20,16 @@
 
     // Configure the view for the selected state
 }
+
+// Set up caption, author, image of feed cell
+- (void) refreshData {
+    NSString *URLString = self.post.image.url;
+    NSURL *url = [NSURL URLWithString:URLString];
+    [self.picImageView setImageWithURL: url];
+    self.captionLabel.text = self.post.caption;
+    self.authorLabel.text = self.post.author.username;
+    
+}
+
 
 @end

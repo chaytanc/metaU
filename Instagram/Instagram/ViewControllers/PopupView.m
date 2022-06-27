@@ -33,9 +33,7 @@
         self.backgroundColor = UIColor.greenColor;
         self.layer.cornerRadius = 24;
 //        self.clipsToBounds = TRUE;
-//        [self.layer setShadowColor:([UIColor lightGrayColor])];
-        //XXX shadow not showing up
-//        [self.layer setShadowColor:CGColorCreateSRGB(100, 100, 1, 1)];
+
         [self.layer setShadowColor:[[UIColor systemCyanColor] CGColor]];
         [self.layer setShadowOffset:CGSizeMake(5, 5)];
         [self.layer setShadowRadius:5];
@@ -131,6 +129,8 @@
 - (void) formatPasswordField {
     self.passwordField = [UITextField new];
     self.passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Create a password" attributes:@{NSForegroundColorAttributeName: [UIColor systemCyanColor]}];
+    self.passwordField.textContentType = UITextContentTypeNewPassword;
+    self.passwordField.secureTextEntry = YES;
 }
 
 - (void) formatUsernameField {

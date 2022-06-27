@@ -8,7 +8,7 @@
 #import "ComposeViewController.h"
 
 @interface ComposeViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
+@property (nonatomic, weak) UIImage* selectedImage;
 @end
 
 @implementation ComposeViewController
@@ -39,24 +39,23 @@
 
     //XXX todo Do something with the images (based on your use case)
     [self.picImageView setImage: editedImage];
+    self.selectedImage = editedImage;
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+// todo tap imageview and pull up imagepickercontroller again
+//- (void)
 
 - (IBAction)didTapShare:(id)sender {
+    //xxx post w caption and image
+    // where do we get currently logged in user id from?
+    // post.image = selectedImage;
 }
 
 - (IBAction)didTapCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

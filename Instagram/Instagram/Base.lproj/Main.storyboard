@@ -56,17 +56,17 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="homePicCell" id="Orp-eh-yTB" customClass="HomePicCell">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="196.5"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="217"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Orp-eh-yTB" id="qPk-uX-47w">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="196.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYz-Wz-QB8" userLabel="contentView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="196.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cfa-pl-t8G" userLabel="cellStackView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="196.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hO7-bi-nTd" userLabel="picStackView">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="175.5"/>
@@ -90,8 +90,14 @@
                                                                                 <constraint firstItem="aah-oi-vHI" firstAttribute="width" secondItem="HUY-uT-ea5" secondAttribute="width" id="2xe-8q-2H9"/>
                                                                             </constraints>
                                                                         </stackView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyR-AG-6HQ" userLabel="captionLabel">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pr-FH-NYW" userLabel="authorLabel">
                                                                             <rect key="frame" x="0.0" y="175.5" width="414" height="21"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyR-AG-6HQ" userLabel="captionLabel">
+                                                                            <rect key="frame" x="0.0" y="196.5" width="414" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -116,6 +122,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="authorLabel" destination="1pr-FH-NYW" id="adL-sx-LLW"/>
                                                     <outlet property="captionLabel" destination="VyR-AG-6HQ" id="fe1-hB-uNJ"/>
                                                     <outlet property="picImageView" destination="Jha-5O-sss" id="9Vg-sT-PTe"/>
                                                 </connections>
@@ -261,7 +268,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IpP-tk-dP1" userLabel="passwordField">
                                         <rect key="frame" x="57" y="405" width="300" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZS7-6c-S1v" userLabel="buttonsView">
                                         <rect key="frame" x="57" y="479" width="300" height="50"/>
@@ -347,11 +354,11 @@
             <objects>
                 <viewController id="r7g-7k-CVh" userLabel="Profile View Controller" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0CJ-fD-c8s">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="qTm-A4-acO" userLabel="headerStackView">
-                                <rect key="frame" x="0.0" y="56" width="414" height="247.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="247.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Ve-9j-4mI" userLabel="profilePicStackView">
                                         <rect key="frame" x="0.0" y="0.0" width="227" height="247.5"/>
@@ -436,7 +443,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4wm-lC-xLa" userLabel="profilePhotosCollectionView">
-                                <rect key="frame" x="0.0" y="303.5" width="414" height="509.5"/>
+                                <rect key="frame" x="0.0" y="335.5" width="414" height="477.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pa3-pa-T5m">
                                     <size key="itemSize" width="128" height="128"/>
@@ -513,18 +520,18 @@
                     </tabBar>
                     <connections>
                         <segue destination="JlF-pU-OUq" kind="relationship" relationship="viewControllers" id="PpU-eQ-3ab"/>
-                        <segue destination="XCP-sR-NIj" kind="presentation" id="HKb-JC-NCO"/>
+                        <segue destination="XCP-sR-NIj" kind="relationship" relationship="viewControllers" id="03B-5X-IPE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzx-5L-O5v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1363.768115942029" y="-569.19642857142856"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="Ahq-n4-0qP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JlF-pU-OUq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2Oc-nb-PLR"/>
+                    <tabBarItem key="tabBarItem" title="" image="feed_tab" id="2Oc-nb-PLR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jD2-6j-YmF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -539,14 +546,14 @@
             </objects>
             <point key="canvasLocation" x="2204" y="-582"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="VMh-s9-59h">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XCP-sR-NIj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="TQ6-qr-1Yt"/>
+                    <tabBarItem key="tabBarItem" title="" image="profile_tab" id="TQ6-qr-1Yt" userLabel="profileItem"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="T5c-Cn-RMk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -580,7 +587,9 @@
     <resources>
         <image name="Icon-60" width="60" height="60"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="feed_tab" width="25" height="25"/>
         <image name="insta_camera_btn" width="25" height="25"/>
+        <image name="profile_tab" width="25" height="25"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
