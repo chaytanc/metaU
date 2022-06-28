@@ -14,6 +14,8 @@
 		9C74E4AD28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4AC28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m */; };
 		9C74E4B028661B29003FFFF7 /* HomePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4AF28661B29003FFFF7 /* HomePicCell.m */; };
 		9C74E4B528665F4C003FFFF7 /* UIViewController+PresentError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */; };
+		9C74E4B8286A72EE003FFFF7 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4B7286A72EE003FFFF7 /* DetailsViewController.m */; };
+		9C74E4BB286A864B003FFFF7 /* DetailsNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4BA286A864B003FFFF7 /* DetailsNavController.m */; };
 		9C8B61412863CAD500C7D7A3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61402863CAD500C7D7A3 /* LoginViewController.m */; };
 		9C8B61442863CAE700C7D7A3 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61432863CAE700C7D7A3 /* HomeViewController.m */; };
 		9C8B61472863CE8000C7D7A3 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61462863CE8000C7D7A3 /* PopupView.m */; };
@@ -64,6 +66,10 @@
 		9C74E4AF28661B29003FFFF7 /* HomePicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePicCell.m; sourceTree = "<group>"; };
 		9C74E4B328665F4C003FFFF7 /* UIViewController+PresentError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentError.h"; sourceTree = "<group>"; };
 		9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentError.m"; sourceTree = "<group>"; };
+		9C74E4B6286A72EE003FFFF7 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		9C74E4B7286A72EE003FFFF7 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		9C74E4B9286A864B003FFFF7 /* DetailsNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsNavController.h; sourceTree = "<group>"; };
+		9C74E4BA286A864B003FFFF7 /* DetailsNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsNavController.m; sourceTree = "<group>"; };
 		9C8B613F2863CAD500C7D7A3 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9C8B61402863CAD500C7D7A3 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		9C8B61422863CAE700C7D7A3 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -151,12 +157,16 @@
 		9C8B613E2863CAA600C7D7A3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9C74E4B9286A864B003FFFF7 /* DetailsNavController.h */,
+				9C74E4BA286A864B003FFFF7 /* DetailsNavController.m */,
 				9C8B613F2863CAD500C7D7A3 /* LoginViewController.h */,
 				9C8B61402863CAD500C7D7A3 /* LoginViewController.m */,
 				9C8B61422863CAE700C7D7A3 /* HomeViewController.h */,
 				9C74E4A728661939003FFFF7 /* ProfileViewController.h */,
 				9C74E4A828661939003FFFF7 /* ProfileViewController.m */,
 				9C8B61432863CAE700C7D7A3 /* HomeViewController.m */,
+				9C74E4B6286A72EE003FFFF7 /* DetailsViewController.h */,
+				9C74E4B7286A72EE003FFFF7 /* DetailsViewController.m */,
 				9C8B61452863CE8000C7D7A3 /* PopupView.h */,
 				9C8B61462863CE8000C7D7A3 /* PopupView.m */,
 				9C74E4A42865477C003FFFF7 /* ComposeViewController.h */,
@@ -482,10 +492,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C74E4BB286A864B003FFFF7 /* DetailsNavController.m in Sources */,
 				9C8B61472863CE8000C7D7A3 /* PopupView.m in Sources */,
 				9C74E4A928661939003FFFF7 /* ProfileViewController.m in Sources */,
 				9C74E4AD28661A3C003FFFF7 /* ProfileImagesCellCollectionViewCell.m in Sources */,
 				9C8B61412863CAD500C7D7A3 /* LoginViewController.m in Sources */,
+				9C74E4B8286A72EE003FFFF7 /* DetailsViewController.m in Sources */,
 				9C74E4A62865477C003FFFF7 /* ComposeViewController.m in Sources */,
 				9C74E4B528665F4C003FFFF7 /* UIViewController+PresentError.m in Sources */,
 				9CF6C80028638762005FC69C /* AppDelegate.m in Sources */,

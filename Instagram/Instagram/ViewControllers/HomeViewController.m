@@ -13,6 +13,8 @@
 #import "HomePicCell.h"
 #import "Post.h"
 #import "UIImageView+AFNetworking.h"
+//#import "DetailsNavController.h"
+#import "DetailsViewController.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) NSArray* posts;
@@ -98,11 +100,23 @@
     return self.posts.count;
 }
 
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"detailsSegue" sender:indexPath];
+}
+
 // MARK: Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = (NSIndexPath *)sender;
     UINavigationController *navigationController = [segue destinationViewController];
+    if ([[segue identifier] isEqualToString:@"detailsSegue"]) {
+        // Send post data to details VC
+        DetailsViewController* targetController = (DetailsViewController*) navigationController.topViewController;
+        targetController.post = self.posts[indexPath.row];
+    }
     navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+
+
 //
 //    if ([[segue identifier] isEqualToString:@"composeSegue"])
 //    {

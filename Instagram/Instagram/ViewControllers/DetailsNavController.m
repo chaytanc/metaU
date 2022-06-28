@@ -6,6 +6,7 @@
 //
 
 #import "DetailsNavController.h"
+#import "DetailsViewController.h"
 
 @interface DetailsNavController ()
 
@@ -18,14 +19,16 @@
     // Do any additional setup after loading the view.
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DetailsViewController *detailsViewController = [storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
+    detailsViewController.post = self.post;
 }
-*/
+
 
 @end

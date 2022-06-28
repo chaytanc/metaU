@@ -21,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
     @property (nonatomic, strong) PFUser *author;
     @property (nonatomic, strong) NSNumber *likeCount;
     @property (nonatomic, strong) NSNumber *commentCount;
+    @property (nonatomic, strong) NSString *created;
 
+    - (void) setFormattedCreatedAtString;
     + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
     

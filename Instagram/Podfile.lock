@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.1)
+  - DateTools (2.0.0)
   - Parse (1.19.3):
     - Parse/Core (= 1.19.3)
   - Parse/Core (1.19.3):
@@ -23,6 +24,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - DateTools
   - Parse
   - SnapKit
 
@@ -30,15 +32,17 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - Bolts
+    - DateTools
     - Parse
     - SnapKit
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 6f88f7e6c04d0288b975f3df66e3a26076461290
+PODFILE CHECKSUM: 08ea4c139bd0da77f91919d5ce5482e215f74b42
 
 COCOAPODS: 1.11.3
