@@ -11,7 +11,8 @@
 #import "PopupView.h"
 #import "SceneDelegate.h"
 #import "UIViewController+PresentError.h"
-
+//XXX remove
+#import "UIViewController+ResignKeyboard.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -60,7 +61,11 @@
 
 - (IBAction)didTapSignup:(id)sender {
     NSLog(@"Sign up tapped");
-    UIView* popup = [PopupView new];
+    PopupView* popup = [PopupView new];
+    //XXX working here to resign VC NOTE these are nil because they are currently setup in layoutsubviews
+    popup.usernameField.delegate = self;
+    popup.passwordField.delegate = self;
+    popup.emailField.delegate = self;
     [self.view addSubview:popup];
 
     int frameHeight = self.view.frame.size.height * 0.80;

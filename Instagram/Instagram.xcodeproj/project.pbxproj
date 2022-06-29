@@ -15,6 +15,7 @@
 		9C74E4B028661B29003FFFF7 /* HomePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4AF28661B29003FFFF7 /* HomePicCell.m */; };
 		9C74E4B528665F4C003FFFF7 /* UIViewController+PresentError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */; };
 		9C74E4B8286A72EE003FFFF7 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4B7286A72EE003FFFF7 /* DetailsViewController.m */; };
+		9C74E4BE286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C74E4BD286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.m */; };
 		9C8B61412863CAD500C7D7A3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61402863CAD500C7D7A3 /* LoginViewController.m */; };
 		9C8B61442863CAE700C7D7A3 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61432863CAE700C7D7A3 /* HomeViewController.m */; };
 		9C8B61472863CE8000C7D7A3 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C8B61462863CE8000C7D7A3 /* PopupView.m */; };
@@ -67,6 +68,8 @@
 		9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentError.m"; sourceTree = "<group>"; };
 		9C74E4B6286A72EE003FFFF7 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		9C74E4B7286A72EE003FFFF7 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		9C74E4BC286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ResignKeyboard.h"; sourceTree = "<group>"; };
+		9C74E4BD286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ResignKeyboard.m"; sourceTree = "<group>"; };
 		9C8B613F2863CAD500C7D7A3 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9C8B61402863CAD500C7D7A3 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		9C8B61422863CAE700C7D7A3 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				9C74E4AC28661A3C003FFFF7 /* ProfileImagesCell.m */,
 				9C74E4B328665F4C003FFFF7 /* UIViewController+PresentError.h */,
 				9C74E4B428665F4C003FFFF7 /* UIViewController+PresentError.m */,
+				9C74E4BC286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.h */,
+				9C74E4BD286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.m */,
 			);
 			path = CustomComponents;
 			sourceTree = "<group>";
@@ -492,6 +497,7 @@
 				9C74E4AD28661A3C003FFFF7 /* ProfileImagesCell.m in Sources */,
 				9C8B61412863CAD500C7D7A3 /* LoginViewController.m in Sources */,
 				9C74E4B8286A72EE003FFFF7 /* DetailsViewController.m in Sources */,
+				9C74E4BE286CF9AB003FFFF7 /* UIViewController+ResignKeyboard.m in Sources */,
 				9C74E4A62865477C003FFFF7 /* ComposeViewController.m in Sources */,
 				9C74E4B528665F4C003FFFF7 /* UIViewController+PresentError.m in Sources */,
 				9CF6C80028638762005FC69C /* AppDelegate.m in Sources */,
@@ -605,7 +611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -657,7 +663,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -8,6 +8,7 @@
 #import "PopupView.h"
 #import "Parse/Parse.h"
 #import "HomeViewController.h"
+#import "SceneDelegate.h"
 #import "AppDelegate.h"
 
 @interface PopupView ()
@@ -16,9 +17,7 @@
 @property (strong, nonatomic) UIButton* doneButton;
 @property (strong, nonatomic) UIButton* cancelButton;
 @property (strong, nonatomic) UIStackView* popupStackView;
-@property (strong, nonatomic) UITextField* usernameField;
-@property (strong, nonatomic) UITextField* emailField;
-@property (strong, nonatomic) UITextField* passwordField;
+// Fields are public in .h
 
 @end
 
@@ -28,7 +27,7 @@
 {
     self = [super init];
     if (self) {
-        
+                
         self.alpha = 0.5;
         self.backgroundColor = UIColor.greenColor;
         self.layer.cornerRadius = 24;
@@ -38,6 +37,15 @@
         [self.layer setShadowOffset:CGSizeMake(5, 5)];
         [self.layer setShadowRadius:5];
         [self.layer setShadowOpacity:0.9];
+        
+        // Create UI components
+        [self formatTitleLabel];
+        [self formatDoneButton];
+        [self formatUsernameField];
+        [self formatEmailField];
+        [self formatPasswordField];
+        [self formatCancelButton];
+        [self formatPopupStackView];
            
     }
     return self;
@@ -46,14 +54,7 @@
 - (void) layoutSubviews {
     [super layoutSubviews];
     // Frame based layouts here
-    [self formatTitleLabel];
-    [self formatDoneButton];
-    [self formatUsernameField];
-    [self formatEmailField];
-    [self formatPasswordField];
-    [self formatCancelButton];
-
-    [self formatPopupStackView];
+    [self setStackViewConstraints];
 
 }
 
@@ -76,12 +77,8 @@
     UIFont* font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:19];
     [self.titleLabel setFont:font];
     self.titleLabel.textColor = [UIColor blackColor];
-//    self.titleLabel.numberOfLines = 0;
-//    self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.titleLabel.minimumScaleFactor = 0.6;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [self.titleLabel]
-//    UIFontTextStyleTitle1
 }
 
 - (void) formatDoneButton {
@@ -98,7 +95,7 @@
 - (void) doneButtonPressed: (UIButton *) button {
     // TODO 
     NSLog(@"Done tapped!!!");
-    //XXX todo if create user succeeds dismiss and go to home, otherwise present error and go to login
+    // if create user succeeds dismiss and go to home, otherwise present error and go to login
     // Todo, disable signup button on login when popup is in view
     [self registerUser];
 }
@@ -148,14 +145,19 @@
     [self.popupStackView addArrangedSubview: self.cancelButton];
 
     self.popupStackView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.popupStackView.axis = UILayoutConstraintAxisVertical;
     self.popupStackView.distribution = UIStackViewDistributionFillEqually;
     self.popupStackView.backgroundColor = [UIColor whiteColor];
-    
-    [self.popupStackView setLayoutMargins:UIEdgeInsetsMake(8, 8, 8, 8)];
-    [self.popupStackView setLayoutMarginsRelativeArrangement:YES];
+
     
     [self addSubview:self.popupStackView];
+
+    
+}
+
+- (void) setStackViewConstraints {
+    self.popupStackView.axis = UILayoutConstraintAxisVertical;
+    [self.popupStackView setLayoutMargins:UIEdgeInsetsMake(8, 8, 8, 8)];
+    [self.popupStackView setLayoutMarginsRelativeArrangement:YES];
     // Constrain to sides
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
@@ -166,7 +168,6 @@
 //        [self.popupStackView.widthAnchor constraintEqualToConstant:self.frame.size.width].active = true;
     
     [self addConstraints:@[left, top, right, bottom]];
-    
 }
 
 - (void)registerUser {
@@ -188,10 +189,13 @@
             
             [self removeFromSuperview];
             // manually segue to logged in view
-            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            
+            SceneDelegate *sceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+            
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
-            appDelegate.window.rootViewController = homeViewController;
+            UITabBarController *homeViewController = (UITabBarController*) [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
+
+            [sceneDelegate.window setRootViewController:homeViewController];
         }
     }];
 }
