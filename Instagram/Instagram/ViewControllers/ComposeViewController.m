@@ -22,6 +22,7 @@
     self.imagePickerVC.delegate = self;
     self.imagePickerVC.allowsEditing = YES;
     [self addImageTapRecognizer];
+    // Automatically pull up photo picker on didLoad
     [self getPhoto];
 }
 
@@ -51,7 +52,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-// todo tap imageview and pull up imagepickercontroller again
 - (void) addImageTapRecognizer {
     [self.picImageView setUserInteractionEnabled:YES];
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer new] initWithTarget:self action:@selector(imageTapped:)];
@@ -64,7 +64,6 @@
 }
 
 - (IBAction)didTapShare:(id)sender {
-    //xxx post w caption and image
     // Posts to PFUser's currentUser account
     [Post postUserImage:self.selectedImage withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {

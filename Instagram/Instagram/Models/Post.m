@@ -43,7 +43,6 @@
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     
-//    [newPost saveInBackgroundWithBlock: completion];
     [newPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {
             NSLog(@"new post save created!");
@@ -75,25 +74,25 @@
 }
 
 
-NSString * const kCachedDateFormatterKey = @"CachedDateFormatterKey";
-
-+ (NSDateFormatter *)dateFormatter {
-    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
-    NSDateFormatter *formatter = [threadDictionary objectForKey:kCachedDateFormatterKey];
-    if (!formatter) {
-        formatter = [[NSDateFormatter alloc] init];
-        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        [formatter setLocale:enUSPOSIXLocale];
-        // Configure the input format to parse the date string
-        // 2022-06-27 22:00:15 +0000
-        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZZZ";
-        // Configure output format
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-        [threadDictionary setObject:formatter forKey:kCachedDateFormatterKey];
-    }
-    return formatter;
-}
+//NSString * const kCachedDateFormatterKey = @"CachedDateFormatterKey";
+//
+//+ (NSDateFormatter *)dateFormatter {
+//    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+//    NSDateFormatter *formatter = [threadDictionary objectForKey:kCachedDateFormatterKey];
+//    if (!formatter) {
+//        formatter = [[NSDateFormatter alloc] init];
+//        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+//        [formatter setLocale:enUSPOSIXLocale];
+//        // Configure the input format to parse the date string
+//        // 2022-06-27 22:00:15 +0000
+//        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZZZ";
+//        // Configure output format
+//        formatter.dateStyle = NSDateFormatterShortStyle;
+//        formatter.timeStyle = NSDateFormatterNoStyle;
+//        [threadDictionary setObject:formatter forKey:kCachedDateFormatterKey];
+//    }
+//    return formatter;
+//}
 
 
 - (void) setFormattedCreatedAtString {

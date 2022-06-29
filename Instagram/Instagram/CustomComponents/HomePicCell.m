@@ -31,20 +31,10 @@
 
 - (void) formatAuthorLabel {
     
-//    [self.authorLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:16]];
-
 }
 
 - (void) formatCaptionLabel {
 
-    
-    
-    
-//    NSString *dateString = [NSString stringWithFormat:@"%@%@", @"Teslimat: ", selectedReservationModel.DateLabel];
-//            NSMutableAttributedString *attrS = [[NSMutableAttributedString alloc] initWithString: dateString];
-//            [attrS addAttribute:NSFontAttributeName value:[GenericUtility getOpenSansBoldFontSize:12] range:NSMakeRange(0, 8)];
-//            [attrS addAttribute:NSFontAttributeName value:[GenericUtility getOpenSansRegularFontSize:12] range:NSMakeRange(9, selectedReservationModel.DateLabel.length)];
-//            lblDeliveryDate.attributedText = attrS;
 }
 
 - (void) formatPicImageView {
@@ -69,13 +59,12 @@
     NSString *string = [usernameString stringByAppendingString: self.post.caption];
     NSRange captionRange = NSMakeRange(usernameString.length, string.length - usernameString.length);
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:string];
+    
     [attributed beginEditing];
-
     [attributed addAttribute:NSFontAttributeName
                value:[UIFont fontWithName:@"Helvetica-Bold" size:14.0]
                range:selectedRange];
     [attributed addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:14.0] range:captionRange];
-
     [attributed endEditing];
 
     self.captionLabel.attributedText = attributed;

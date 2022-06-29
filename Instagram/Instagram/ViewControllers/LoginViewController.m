@@ -13,7 +13,7 @@
 #import "UIViewController+PresentError.h"
 
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 
 @end
 

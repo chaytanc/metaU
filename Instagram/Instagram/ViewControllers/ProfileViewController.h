@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *rightNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightNumDescLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *profilePhotosCollectionView;
 
 @end
 

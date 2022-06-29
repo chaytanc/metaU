@@ -13,7 +13,6 @@
 #import "HomePicCell.h"
 #import "Post.h"
 #import "UIImageView+AFNetworking.h"
-//#import "DetailsNavController.h"
 #import "DetailsViewController.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
