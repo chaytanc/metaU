@@ -69,5 +69,4 @@
 
     self.captionLabel.attributedText = attributed;
 }
-
 @end

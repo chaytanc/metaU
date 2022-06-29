@@ -38,17 +38,12 @@
     self.user = [PFUser currentUser];
     [self addImageTapRecognizer];
     [self getUserPosts];
-    [self setProfileData];
     
     // Refresh for the data in the tableview
     //XXX not working
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.profilePhotosCollectionView insertSubview:refreshControl atIndex:0];
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    [self setProfileData];
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -105,8 +100,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-// Todo: set profile, username, followers, etc
-
 - (int) calcNumLikes {
     int totalLikes = 0;
     for(Post* post in self.userPosts) {
@@ -131,6 +124,7 @@
             [self presentError:@"Failed to retrieve user posts" message:error.localizedDescription error:error];
         }
         [self.profilePhotosCollectionView reloadData];
+        [self setProfileData];
     }];
 }
 

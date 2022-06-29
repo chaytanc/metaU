@@ -19,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self addImageTapRecognizer];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -60,6 +61,14 @@
     [attributed endEditing];
     self.captionLabel.attributedText = attributed;
     
+    // If liked by user, set heart to be filled in
+    if([self.post.likedBy containsObject:[PFUser currentUser].username]) {
+        [self.likeImageView setImage:[UIImage systemImageNamed:@"heart.fill"]];
+    }
+    else {
+        [self.likeImageView setImage:[UIImage systemImageNamed:@"heart"]];
+    }
+    
     
 }
 
@@ -67,6 +76,43 @@
     UIViewController *destController = [segue destinationViewController];
     destController.modalPresentationStyle = UIModalPresentationFullScreen;
 }
+
+
+- (void) addImageTapRecognizer {
+
+    [self.picImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer new] initWithTarget:self action:@selector(imageDoubleTapped:)];
+    [tapGesture setNumberOfTapsRequired:2];
+    [self.picImageView addGestureRecognizer:tapGesture];
+
+}
+
+- (void) imageDoubleTapped: (UITapGestureRecognizer*) tapGestureRecognizer {
+
+    // If we already liked the post
+    NSString* username = [PFUser currentUser].username;
+    // If already liked, remove, otherwise add
+    if([self.post.likedBy containsObject:username]) {
+        [self.post.likedBy removeObject:username];
+    }
+    else {
+        [self.post.likedBy addObject:username];
+    }
+    self.post.likeCount = @(self.post.likedBy.count);
+    // Note: This line was unintuitively necessary to update the database w likedBy
+    self.post[@"likedBy"] = self.post.likedBy;
+    
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded) {
+            NSLog(@"Like count updated!");
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        [self refreshData];
+    }];
+}
+
 
 - (IBAction)backButtonTapped:(id)sender {
     
