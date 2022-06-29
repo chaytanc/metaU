@@ -9,4 +9,12 @@
 
 @implementation ProfileImagesCell
 
+- (void) layoutSubviews {
+    // Make it rounded
+    [self.profileImagesImageView.layer setCornerRadius:self.profileImagesImageView.frame.size.width/20];
+    [self.profileImagesImageView.layer setMasksToBounds:YES];
+}
+
+
+
 @end

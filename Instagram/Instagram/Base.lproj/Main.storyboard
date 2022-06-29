@@ -645,7 +645,7 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4wm-lC-xLa" userLabel="profilePhotosCollectionView">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4wm-lC-xLa" userLabel="profilePhotosCollectionView">
                                 <rect key="frame" x="0.0" y="254" width="414" height="559"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pa3-pa-T5m">
@@ -664,6 +664,10 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W3J-Zy-4Yl" userLabel="profileImagesImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="130" id="isT-vF-q73"/>
+                                                        <constraint firstAttribute="width" secondItem="W3J-Zy-4Yl" secondAttribute="height" multiplier="1:1" id="kki-vx-1Qn"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -698,6 +702,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="1Jn-qV-b8L"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="headerStackView" destination="qTm-A4-acO" id="Ipy-8j-eV3"/>
                         <outlet property="leftNumDescLabel" destination="lpc-eI-dVi" id="jOE-dN-knq"/>
                         <outlet property="leftNumLabel" destination="2ZZ-Eg-5jN" id="gcR-ua-THD"/>
                         <outlet property="midNumDescLabel" destination="xYa-Ws-nMg" id="hzl-aJ-ven"/>

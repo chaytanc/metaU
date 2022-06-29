@@ -25,7 +25,6 @@
     [super viewDidLoad];
     self.feedTableView.dataSource = self;
     self.feedTableView.delegate = self;
-    // Do any additional setup after loading the view.
     // Refresh for the data in the tableview
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -77,7 +76,6 @@
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 
             [sceneDelegate.window setRootViewController:loginViewController];
-
         }
     }];
 }
@@ -99,8 +97,7 @@
     return self.posts.count;
 }
 
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"detailsSegue" sender:indexPath];
 }
 
@@ -115,21 +112,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     }
     navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-
-//
-//    if ([[segue identifier] isEqualToString:@"composeSegue"])
-//    {
-//
-//
-//        DetailsViewController *detailsController = (DetailsViewController*)navigationController.topViewController;
-//        detailsController.tweet = self.arrayOfTweets[indexPath.row];
-//    }
-//    else if ([[segue identifier] isEqualToString:@"composeSegue"]) {
-//        UINavigationController *navigationController = [segue destinationViewController];
-//        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-//        // Tell composeController we can receive info about tweet composed
-//        composeController.delegate = self;
-//    }
 }
 
 @end

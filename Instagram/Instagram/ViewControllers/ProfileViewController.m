@@ -10,6 +10,7 @@
 #import "Post.h"
 #import "UIImageView+AFNetworking.h"
 #import "ProfileImagesCell.h"
+#import "UIViewController+PresentError.h"
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UIImagePickerController* imagePickerVC;
@@ -29,9 +30,30 @@
     self.profilePhotosCollectionView.delegate = self;
     self.profilePhotosCollectionView.dataSource = self;
     
+    // Make it rounded
+    [self.profilePicImageView.layer setCornerRadius:self.profilePicImageView.frame.size.width/2]; 
+    [self.profilePicImageView.layer setMasksToBounds:YES];
+
+    
     self.user = [PFUser currentUser];
     [self addImageTapRecognizer];
+    [self getUserPosts];
     [self setProfileData];
+    
+    // Refresh for the data in the tableview
+    //XXX not working
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.profilePhotosCollectionView insertSubview:refreshControl atIndex:0];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self setProfileData];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self getUserPosts];
+    [refreshControl endRefreshing];
 }
 
 //XXX todo duplicate code from composeVC
@@ -84,17 +106,19 @@
 }
 
 // Todo: set profile, username, followers, etc
-// Todo: set collection view
+
+- (int) calcNumLikes {
+    int totalLikes = 0;
+    for(Post* post in self.userPosts) {
+        totalLikes += [post.likeCount integerValue];
+    }
+    return totalLikes;
+}
 
 - (void) getUserPosts {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    // If we want to get more than 20, query based on date and store latest date or post taht was fetched
-//    [query whereKey:@"likesCount" greaterThan:@100];
-    //XXX todo when loading more than 20, have to store latest shown
-//    [query orderByDescending:@"createdAt" whereKey:"createdAt" greaterThan:lastLoaded];
-    [query whereKey:@"author" matchesText:[PFUser currentUser].objectId];
-//    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"author" equalTo:self.user];
 //    query.limit = 20;
 
     // fetch data asynchronously
@@ -104,6 +128,7 @@
             self.userPosts = posts;
         } else {
             NSLog(@"%@", error.localizedDescription);
+            [self presentError:@"Failed to retrieve user posts" message:error.localizedDescription error:error];
         }
         [self.profilePhotosCollectionView reloadData];
     }];
@@ -116,16 +141,16 @@
     NSURL *url = [NSURL URLWithString:URLString];
     [self.profilePicImageView setImageWithURL:url];
     
-//    NSString *usernameString = [self.user.username stringByAppendingFormat:@"   "];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:self.user.username];
     [attributed beginEditing];
     [attributed addAttribute:NSFontAttributeName
                value:[UIFont fontWithName:@"Helvetica-Bold" size:14.0]
                 range:NSRangeFromString(self.user.username)];
     [attributed endEditing];
+    
     self.nameLabel.attributedText = attributed;
-//    self.leftNumLabel = // num posts
-//    self.rightNumLabel = // num likes
+    self.leftNumLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.userPosts.count]; // num posts
+    self.rightNumLabel.text = [NSString stringWithFormat:@"%d", [self calcNumLikes]]; // num likes
 }
 
 // MARK: CollectionView
