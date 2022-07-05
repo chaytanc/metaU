@@ -158,6 +158,7 @@
     self.popupStackView.axis = UILayoutConstraintAxisVertical;
     [self.popupStackView setLayoutMargins:UIEdgeInsetsMake(8, 8, 8, 8)];
     [self.popupStackView setLayoutMarginsRelativeArrangement:YES];
+    
     // Constrain to sides
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.popupStackView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];

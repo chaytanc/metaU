@@ -11,8 +11,6 @@
 #import "PopupView.h"
 #import "SceneDelegate.h"
 #import "UIViewController+PresentError.h"
-//XXX remove
-#import "UIViewController+ResignKeyboard.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
